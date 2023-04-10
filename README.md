@@ -20,6 +20,7 @@
 * Projeto Cliente - Iniciar um ou mais clientes 
 	* Run as Java Application (Cliente)
 * Obs: Testes feitos com o eclipse (carregar como projetos distintos)
+* Obs 2: Para editar o frame visualmente, necessário plugin WindowBuilder (instalavel pelo Eclipse Marketplace) e abrir como WindowBuilderEditor (aba inferior 'Design')
 
 ### :warning: Erros/Aprimoramentos:
 
