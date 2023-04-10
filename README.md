@@ -23,7 +23,7 @@
 
 ### :warning: Erros/Aprimoramentos:
 
-* Não é possivel limpar o 'grupo' após ter selecionado varios e enviado mensagem
+* Não é possivel limpar o campo 'grupo' após ter selecionado varios e enviado mensagem
 * Não entendivel o funcionamento de 'Grupo'
 * Melhorar código/estrutura do projeto
 * Aplicar a funcionalidade para envio de arquivo e se possivel para audio
