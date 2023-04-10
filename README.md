@@ -15,15 +15,15 @@
 
 ### :gear: Configurações:
 
-* Obs: Testes feitos com o eclipse
-* Diretório Servidor - Iniciar o servidor 
+* Projeto Servidor - Iniciar o servidor 
 	* Run as Java Application
-* Diretório Cliente - Iniciar um ou mais clientes 
-	* Run as Java Application - Cliente
+* Projeto Cliente - Iniciar um ou mais clientes 
+	* Run as Java Application (Cliente)
+* Obs: Testes feitos com o eclipse (carregar como projetos distintos)
 
 ### :warning: Erros/Aprimoramentos:
 
-* Não é possivel limpar o campo 'grupo' após ter selecionado varios e enviado mensagem
+* Não é possivel limpar o campo 'grupo' após ter selecionado varios e enviado mensagem, colocar para limpar apos uma mensagem ou aparecer opcao pra limpar
 * Não entendivel o funcionamento de 'Grupo'
 * Melhorar código/estrutura do projeto
 * Aplicar a funcionalidade para envio de arquivo e se possivel para audio
