@@ -10,8 +10,26 @@ public class ChatMessage implements Serializable {
 	private String name;
 	private String text;
 	private String nameReserved; // armazenar o nome que recebera uma mensagem do tipo reservada
-	private Set<String> setOnlines = new HashSet<String>(); // lista armazena todos os clientes onlines no servidor
+	private Set<String> setOnlines; // lista armazena todos os clientes onlines no servidor
 	private Action action; // para cada mensagem, mostra qual acao vai ser executada baseado no "enum"
+	
+	public ChatMessage() {
+		this.setOnlines = new HashSet<String>();
+	}
+	
+	public ChatMessage(String name, Action action){
+		this();
+		
+		this.name = name;
+		this.action = action;
+	}
+	
+	public ChatMessage(String name, String text){
+		this();
+		
+		this.name = name;
+		this.text = text;
+	}
 
 	public String getName() {
 		return name;
