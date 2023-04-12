@@ -24,12 +24,14 @@
 
 ### :warning: Erros/Aprimoramentos:
 
+* Separar o ClienteFrame do codigo do frame da regra de negocio, como uma ClienteFrameService
 * Não é possivel limpar o campo 'grupo' após ter selecionado varios e enviado mensagem, colocar para limpar apos uma mensagem ou aparecer opcao pra limpar
 * Não entendivel o funcionamento de 'Grupo'
 * Melhorar código/estrutura do projeto
 * Aplicar a funcionalidade para envio de arquivo e se possivel para audio
 * Ajustar para que seja possivel o uso do docker
 * Adicionar imagem do projeto
+* Tentar implementar testes automatizados
 * Ajustar para ser utilizado versão mais recente do Java, por exemplo a 17
 * Verificar quais arquivos não são necessários estar no git, ou seja, os que são gerados pelo Java
 * Tentar dar continuidade nas versões 'Em Construção'
