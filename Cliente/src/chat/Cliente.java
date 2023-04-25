@@ -28,14 +28,19 @@ public class Cliente {
 					break;
 				}
 			}
-		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
+		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
+				| UnsupportedLookAndFeelException ex) {
 			Logger.getLogger(ClienteFrame.class.getName()).log(Level.SEVERE, null, ex);
 		}
 
 		/* Create and display the form */
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
-				new ClienteFrame().setVisible(true);
+				// Work as a Model and a Controller at same time
+				ClienteFrame clienteFrame = new ClienteFrame();
+				clienteFrame.setVisible(true);
+
+//				new ClienteFrame().setVisible(true);
 			}
 		});
 	}
