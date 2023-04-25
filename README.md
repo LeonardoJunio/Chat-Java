@@ -1,6 +1,6 @@
 <h1 align="center">Chat Java</h1>
 
-<p align="center">Chat entre usuários</p>
+<p align="center">Chat entre usuários, como um chat em grupo, mas podendo enviar mensagem privada</p>
 
 <hr> 
 
@@ -24,18 +24,16 @@
 
 ### :warning: Erros/Aprimoramentos:
 
-* Separar o ClienteFrame do codigo do frame da regra de negocio, como uma ClienteFrameService
-* Não é possivel limpar o campo 'grupo' após ter selecionado varios e enviado mensagem, colocar para limpar apos uma mensagem ou aparecer opcao pra limpar
-* Não entendivel o funcionamento de 'Grupo'
+* Desaclopar parcialmente o código de ClienteFrame
 * Melhorar código/estrutura do projeto
-* Aplicar a funcionalidade para envio de arquivo e se possivel para audio
+* Tentar utilizar banco de dados, para assim salvar usuarios e historico de conversa. Além disso, carregar o histórico e usuarios
+* Indicar no chat quando uma mensagem for privada e conter quem enviou e pra quem mais foi
+* Aplicar a funcionalidade para envio de arquivo
 * Ajustar para que seja possivel o uso do docker
 * Adicionar imagem do projeto
 * Tentar implementar testes automatizados
-* Ajustar para ser utilizado versão mais recente do Java, por exemplo a 17
-* Verificar quais arquivos não são necessários estar no git, ou seja, os que são gerados pelo Java
-* Tentar dar continuidade nas versões 'Em Construção'
 * Transferir para inglês(?)
+
 
 ##
 

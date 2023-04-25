@@ -64,16 +64,15 @@ public class ClienteFrame extends JFrame {
 
 			try {
 				while ((message = (ChatMessage) input.readObject()) != null) {
-					Action action = message.getAction();// recebe a acao que o servidor esta enviando
+					Action action = message.getAction(); // get the action sended by the server
 
-					if (action.equals(Action.CONNECT)) { // cliente recebe mensagem do servidor se entrou ou nao
+					if (action.equals(Action.CONNECT)) {
 						connected(message);
 					} else if (action.equals(Action.DISCONNECT)) {
 						disconnected();
 						socket.close();
 					} else if (action.equals(Action.SEND_ONE)) {
-						System.out.println("::: " + message.getText() + " :::");
-						receive(message);// recebe acao do SendOne
+						receive(message);
 					} else if (action.equals(Action.USERS_ONLINE)) {
 						refreshOnlines(message);
 					}
@@ -82,7 +81,6 @@ public class ClienteFrame extends JFrame {
 			} catch (IOException | ClassNotFoundException ex) {
 				Logger.getLogger(ClienteFrame.class.getName()).log(Level.SEVERE, null, ex);
 			}
-
 		}
 	}
 
@@ -127,9 +125,9 @@ public class ClienteFrame extends JFrame {
 	}
 
 	private void refreshOnlines(ChatMessage message) {
-		Set<String> names = message.getSetOnlines(); //alterar nome variavel 'SetOnlines'?
+		Set<String> names = message.getSetOnlines(); // alterar nome variavel 'SetOnlines'?
 
-		//remove of the list the respective user of 'window'
+		// remove of the list the respective user of 'window'
 		names.remove(message.getName());
 
 		String[] arrayNames = names.toArray(new String[names.size()]);
@@ -139,9 +137,92 @@ public class ClienteFrame extends JFrame {
 		this.listOnlines.setLayoutOrientation(JList.VERTICAL);
 	}
 
+	private void btnConnectarActionPerformed(ActionEvent evt) {
+		// name of user typed on interface, to connect
+		String nameUserConnect = this.txtName.getText();
+
+		if (!nameUserConnect.isEmpty()) {
+			// new instance of chat message when create a new connection (?)
+			this.message = new ChatMessage(nameUserConnect, Action.CONNECT);
+
+			this.service = new ClienteService();
+			this.socket = this.service.connect();
+
+			new Thread(new ListenerSocket(this.socket)).start();
+
+			this.service.send(message);
+		}
+	}
+
+	private void btnSairActionPerformed(ActionEvent evt) {
+		// why new instance?
+		ChatMessage message = new ChatMessage(this.message.getName(), Action.DISCONNECT);
+		this.service.send(message);
+		disconnected();
+	}
+
+	private void btnLimparActionPerformed(ActionEvent evt) {
+		this.txtAreaSend.setText("");
+	}
+
+	private void btnEnviarActionPerformed(ActionEvent evt) {
+		String text = this.txtAreaSend.getText();
+		String name = this.message.getName();
+		List<Object> listSelectedUser = this.listOnlines.getSelectedValuesList();
+
+		if (text.isEmpty()) {
+			return;
+		}
+
+		if (listSelectedUser.isEmpty()) {
+			this.message = new ChatMessage(name, text);// why new instance? and dont send correctly if isolate
+			this.message.setAction(Action.SEND_ALL);
+
+			this.service.send(this.message);
+		} else {
+			if (listSelectedUser.size() > 1) {
+				this.LabelGrupo.setText("Último Grupo: " + listSelectedUser.toString());
+			}
+
+			listSelectedUser.forEach(selectedUser -> {
+				this.message = new ChatMessage(name, text);// why new instance? and dont send correctly if isolate
+				this.message.setNameReserved(selectedUser.toString());
+				this.message.setAction(Action.SEND_ONE);
+
+				this.service.send(this.message);
+			});
+
+			this.listOnlines.clearSelection();
+		}
+
+		this.txtAreaReceive.append("Voce disse: " + text + "\n");
+		this.btnLimparActionPerformed(evt);
+	}
+
+	// Variables declaration - be careful when changing it. 
+	// The content of this method is always modified by the Form Editor.
+	private JLabel LabelGrupo;
+	private JButton btnArquivo;
+	private JButton btnAudio;
+	private JButton btnConnectar;
+	private JButton btnEnviar;
+	private JButton btnLimpar;
+	private JButton btnSair;
+	private JButton jButton1;
+	private JPanel jPanel1;
+	private JPanel jPanel2;
+	private JPanel jPanel3;
+	private JScrollPane jScrollPane1;
+	private JScrollPane jScrollPane2;
+	private JScrollPane jScrollPane3;
+	private JList listOnlines;
+	private JTextArea txtAreaReceive;
+	private JTextArea txtAreaSend;
+	private JTextField txtName;
+
 	/**
-	 * This method is called from within the constructor to initialize the form.
-	 * The content of this method is always modified by the Form Editor.
+	 * This method is called from within the constructor to initialize the form. The
+	 * content of this method is always modified by the Form Editor.
 	 */
 	private void initComponents() {
 
@@ -187,15 +268,14 @@ public class ClienteFrame extends JFrame {
 		jPanel1.setLayout(jPanel1Layout);
 		jPanel1Layout.setHorizontalGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
 				.addGroup(jPanel1Layout.createSequentialGroup().addContainerGap().addComponent(txtName)
-						.addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-						.addComponent(btnConnectar)
+						.addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED).addComponent(btnConnectar)
 						.addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED).addComponent(btnSair)
 						.addGap(6, 6, 6)));
 		jPanel1Layout.setVerticalGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
 				.addGroup(jPanel1Layout.createSequentialGroup()
 						.addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-								.addComponent(txtName, GroupLayout.PREFERRED_SIZE,
-										GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addComponent(txtName, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+										GroupLayout.PREFERRED_SIZE)
 								.addComponent(btnConnectar).addComponent(btnSair))
 						.addGap(0, 8, Short.MAX_VALUE)));
 
@@ -211,9 +291,8 @@ public class ClienteFrame extends JFrame {
 		jPanel2Layout.setHorizontalGroup(jPanel2Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
 				.addGroup(jPanel2Layout.createSequentialGroup().addContainerGap()
 						.addGroup(jPanel2Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-								.addComponent(jScrollPane3, GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE)
-								.addComponent(jButton1, GroupLayout.DEFAULT_SIZE,
-										GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+								.addComponent(jScrollPane3, GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE).addComponent(
+										jButton1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 						.addContainerGap()));
 		jPanel2Layout.setVerticalGroup(jPanel2Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
 				.addGroup(jPanel2Layout.createSequentialGroup().addComponent(jScrollPane3)
@@ -275,12 +354,10 @@ public class ClienteFrame extends JFrame {
 						.addContainerGap()));
 		jPanel3Layout.setVerticalGroup(jPanel3Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
 				.addGroup(jPanel3Layout.createSequentialGroup().addContainerGap()
-						.addComponent(jScrollPane1, GroupLayout.PREFERRED_SIZE, 179,
-								GroupLayout.PREFERRED_SIZE)
+						.addComponent(jScrollPane1, GroupLayout.PREFERRED_SIZE, 179, GroupLayout.PREFERRED_SIZE)
 						.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED).addComponent(LabelGrupo)
 						.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-						.addComponent(jScrollPane2, GroupLayout.PREFERRED_SIZE, 61,
-								GroupLayout.PREFERRED_SIZE)
+						.addComponent(jScrollPane2, GroupLayout.PREFERRED_SIZE, 61, GroupLayout.PREFERRED_SIZE)
 						.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
 						.addGroup(jPanel3Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
 								.addComponent(btnEnviar).addComponent(btnLimpar).addComponent(btnArquivo)
@@ -292,110 +369,24 @@ public class ClienteFrame extends JFrame {
 		layout.setHorizontalGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING).addGroup(layout
 				.createSequentialGroup().addContainerGap()
 				.addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
-						.addComponent(jPanel1, GroupLayout.DEFAULT_SIZE,
-								GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addComponent(jPanel1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 						.addGroup(layout.createSequentialGroup()
-								.addComponent(jPanel3, GroupLayout.PREFERRED_SIZE,
-										GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-								.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-								.addComponent(jPanel2, GroupLayout.PREFERRED_SIZE,
-										GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+								.addComponent(jPanel3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+										GroupLayout.PREFERRED_SIZE)
+								.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED).addComponent(jPanel2,
+										GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+										GroupLayout.PREFERRED_SIZE)))
 				.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
-		layout.setVerticalGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-				.addGroup(layout.createSequentialGroup()
-						.addComponent(jPanel1, GroupLayout.PREFERRED_SIZE,
-								GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-						.addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-								.addComponent(jPanel2, GroupLayout.DEFAULT_SIZE,
-										GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-								.addComponent(jPanel3, GroupLayout.DEFAULT_SIZE,
-										GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-						.addContainerGap()));
+		layout.setVerticalGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING).addGroup(layout
+				.createSequentialGroup()
+				.addComponent(jPanel1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+				.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+				.addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+						.addComponent(jPanel2, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addComponent(jPanel3, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+				.addContainerGap()));
 
 		pack();
 	}
 
-	private void btnConnectarActionPerformed(ActionEvent evt) {
-		// name of user typed on interface, to connect
-		String nameUserConnect = this.txtName.getText();
-
-		if (!nameUserConnect.isEmpty()) {
-			// new instance of chat message when create a new connection (?)
-			this.message = new ChatMessage(nameUserConnect, Action.CONNECT);
-
-			this.service = new ClienteService();
-			this.socket = this.service.connect();
-
-			new Thread(new ListenerSocket(this.socket)).start();
-
-			this.service.send(message);
-		}
-	}
-
-	private void btnSairActionPerformed(ActionEvent evt) {
-		//why new instance?
-		ChatMessage message = new ChatMessage(this.message.getName(), Action.DISCONNECT);
-		this.service.send(message);
-		disconnected();
-	}
-
-	private void btnLimparActionPerformed(ActionEvent evt) {
-		this.txtAreaSend.setText("");
-	}
-
-	private void btnEnviarActionPerformed(ActionEvent evt) {
-		String text = this.txtAreaSend.getText();
-		String name = this.message.getName();
-		List<Object> listSelectedUser = this.listOnlines.getSelectedValuesList();
-
-		if (text.isEmpty()) {
-			return;
-		}
-
-		if (listSelectedUser.isEmpty()) {
-			this.message = new ChatMessage(name, text);//why new instance? and dont send correctly if isolate
-			this.message.setAction(Action.SEND_ALL);
-
-			this.service.send(this.message);
-		} else {
-			if (listSelectedUser.size() > 1) {
-				this.LabelGrupo.setText("Último Grupo: " + listSelectedUser.toString());
-			}
-
-			listSelectedUser.forEach(selectedUser -> {
-				this.message = new ChatMessage(name, text);//why new instance? and dont send correctly if isolate
-				this.message.setNameReserved(selectedUser.toString());
-				this.message.setAction(Action.SEND_ONE);
-
-				this.service.send(this.message);
-			});
-
-			this.listOnlines.clearSelection();
-		}
-
-		this.txtAreaReceive.append("Voce disse: " + text + "\n");
-		this.btnLimparActionPerformed(evt);
-	}
-
-	// Variables declaration - do not modify
-	private JLabel LabelGrupo;
-	private JButton btnArquivo;
-	private JButton btnAudio;
-	private JButton btnConnectar;
-	private JButton btnEnviar;
-	private JButton btnLimpar;
-	private JButton btnSair;
-	private JButton jButton1;
-	private JPanel jPanel1;
-	private JPanel jPanel2;
-	private JPanel jPanel3;
-	private JScrollPane jScrollPane1;
-	private JScrollPane jScrollPane2;
-	private JScrollPane jScrollPane3;
-	private JList listOnlines;
-	private JTextArea txtAreaReceive;
-	private JTextArea txtAreaSend;
-	private JTextField txtName;
-	// End of variables declaration
 }
