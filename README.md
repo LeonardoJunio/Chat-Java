@@ -25,7 +25,6 @@
 ### :warning: Erros/Aprimoramentos:
 
 * Aplicar a funcionalidade para envio de arquivo (?)
-* Remover botoes desnecessários
 * Melhorar código/estrutura do projeto
 * Tentar utilizar banco de dados, para assim salvar usuarios e historico de conversa. Além disso, carregar o histórico e usuarios
 * Ajustar para que seja possivel o uso do docker

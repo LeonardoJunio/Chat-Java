@@ -37,10 +37,11 @@ public class Cliente {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				// Work as a Model and a Controller at same time
-				ClienteFrame clienteFrame = new ClienteFrame();
-				clienteFrame.setVisible(true);
+				new ClienteFrame().setVisible(true);
+				
+//				ClienteFrame clienteFrame = new ClienteFrame();
+//				clienteFrame.setVisible(true);
 
-//				new ClienteFrame().setVisible(true);
 			}
 		});
 	}

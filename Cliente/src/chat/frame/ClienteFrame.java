@@ -18,14 +18,19 @@ import javax.swing.LayoutStyle;
 import javax.swing.WindowConstants;
 
 import chat.service.ClienteFrameService;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.border.TitledBorder;
+import javax.swing.border.LineBorder;
+import java.awt.Color;
 
-//Tentar mover o que nao for do frame para uma outra service, tipo ClienteFrameService
+
 public class ClienteFrame extends JFrame {
 	private static final long serialVersionUID = -8895033625174605700L;
 
 	ClienteFrameService service;
 
-	/** Creates new form ClienteFrame */
+	/** Creates new form ClienteFrame with a service and the frame components*/
 	public ClienteFrame() {
 		if (this.service == null) {
 			this.service = new ClienteFrameService(this);
@@ -37,7 +42,6 @@ public class ClienteFrame extends JFrame {
 	// Variables declaration - be careful when changing it.
 	// The content of this method is always modified by the Form Editor.
 	private JButton btnArquivo;
-	private JButton btnAudio;
 	private JButton btnGrupo;
 	private JPanel jPanel1;
 	private JPanel jPanel2;
@@ -61,7 +65,6 @@ public class ClienteFrame extends JFrame {
 	 * content of this method is always modified by the Form Editor.
 	 */
 	private void initComponents() {
-
 		jPanel1 = new JPanel();
 		txtName = new JTextField();
 		btnConnectar = new JButton();
@@ -78,12 +81,16 @@ public class ClienteFrame extends JFrame {
 		btnEnviar = new JButton();
 		btnLimpar = new JButton();
 		btnArquivo = new JButton();
-		btnAudio = new JButton();
 		labelGrupo = new JLabel();
+
+		txtAreaReceive.setLineWrap(true);
+		txtAreaSend.setLineWrap(true);
+		txtAreaSend.setTabSize(4);
 
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
-		jPanel1.setBorder(BorderFactory.createTitledBorder("Conectar"));
+		jPanel1.setBorder(new TitledBorder(new LineBorder(new Color(184, 207, 229)), "Login", TitledBorder.LEADING,
+				TitledBorder.TOP, null, new Color(51, 51, 51)));
 
 		btnConnectar.setText("Connectar");
 		btnConnectar.addActionListener(new ActionListener() {
@@ -92,7 +99,7 @@ public class ClienteFrame extends JFrame {
 			}
 		});
 
-		btnSair.setText("Sair");
+		btnSair.setText("Logout");
 		btnSair.setEnabled(false);
 		btnSair.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent evt) {
@@ -119,7 +126,7 @@ public class ClienteFrame extends JFrame {
 
 		jScrollPane3.setViewportView(listOnlines);
 
-		btnGrupo.setText("Grupo");
+		btnGrupo.setText("Group");
 		btnGrupo.setEnabled(false);
 		btnGrupo.setVisible(false);
 
@@ -138,17 +145,17 @@ public class ClienteFrame extends JFrame {
 		jPanel3.setBorder(BorderFactory.createEtchedBorder());
 
 		txtAreaReceive.setEditable(false);
-		txtAreaReceive.setColumns(20);
+		txtAreaReceive.setColumns(35);
 		txtAreaReceive.setRows(5);
 		txtAreaReceive.setEnabled(false);
 		jScrollPane1.setViewportView(txtAreaReceive);
 
-		txtAreaSend.setColumns(20);
-		txtAreaSend.setRows(5);
+		txtAreaSend.setColumns(35);
+		txtAreaSend.setRows(2);
 		txtAreaSend.setEnabled(false);
 		jScrollPane2.setViewportView(txtAreaSend);
 
-		btnEnviar.setText("Enviar");
+		btnEnviar.setText("Send");
 		btnEnviar.setEnabled(false);
 		btnEnviar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent evt) {
@@ -156,7 +163,7 @@ public class ClienteFrame extends JFrame {
 			}
 		});
 
-		btnLimpar.setText("Limpar");
+		btnLimpar.setText("Clear");
 		btnLimpar.setEnabled(false);
 		btnLimpar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent evt) {
@@ -164,42 +171,38 @@ public class ClienteFrame extends JFrame {
 			}
 		});
 
-		btnArquivo.setText("Arquivo");
+		btnArquivo.setText("File");
 		btnArquivo.setEnabled(false);
 
-		btnAudio.setText("Audio");
-		btnAudio.setEnabled(false);
-
 		labelGrupo.setFont(new Font("Ubuntu", 0, 14)); // NOI18N
-		labelGrupo.setText("Último Grupo: ---");
+		labelGrupo.setText("Last Group: ---");
 
 		GroupLayout jPanel3Layout = new GroupLayout(jPanel3);
-		jPanel3.setLayout(jPanel3Layout);
-		jPanel3Layout.setHorizontalGroup(jPanel3Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+		jPanel3Layout.setHorizontalGroup(jPanel3Layout.createParallelGroup(Alignment.LEADING)
 				.addGroup(jPanel3Layout.createSequentialGroup().addContainerGap()
-						.addGroup(jPanel3Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-								.addComponent(jScrollPane1).addComponent(jScrollPane2)
-								.addGroup(GroupLayout.Alignment.TRAILING,
-										jPanel3Layout.createSequentialGroup().addComponent(btnArquivo)
-												.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED,
-														GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-												.addComponent(btnAudio).addGap(30, 30, 30).addComponent(btnLimpar)
-												.addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-												.addComponent(btnEnviar))
-								.addGroup(jPanel3Layout.createSequentialGroup().addComponent(labelGrupo).addGap(0, 0,
+						.addGroup(jPanel3Layout.createParallelGroup(Alignment.TRAILING)
+								.addComponent(jScrollPane1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+										GroupLayout.PREFERRED_SIZE)
+								.addComponent(jScrollPane2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+										GroupLayout.PREFERRED_SIZE)
+								.addGroup(jPanel3Layout.createSequentialGroup().addComponent(btnArquivo)
+										.addPreferredGap(ComponentPlacement.RELATED, 110, Short.MAX_VALUE)
+										.addComponent(btnLimpar).addPreferredGap(ComponentPlacement.UNRELATED)
+										.addComponent(btnEnviar))
+								.addGroup(jPanel3Layout.createSequentialGroup().addComponent(labelGrupo).addGap(0, 262,
 										Short.MAX_VALUE)))
 						.addContainerGap()));
-		jPanel3Layout.setVerticalGroup(jPanel3Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+		jPanel3Layout.setVerticalGroup(jPanel3Layout.createParallelGroup(Alignment.LEADING)
 				.addGroup(jPanel3Layout.createSequentialGroup().addContainerGap()
 						.addComponent(jScrollPane1, GroupLayout.PREFERRED_SIZE, 179, GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED).addComponent(labelGrupo)
-						.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+						.addPreferredGap(ComponentPlacement.RELATED).addComponent(labelGrupo)
+						.addPreferredGap(ComponentPlacement.RELATED)
 						.addComponent(jScrollPane2, GroupLayout.PREFERRED_SIZE, 61, GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-						.addGroup(jPanel3Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-								.addComponent(btnEnviar).addComponent(btnLimpar).addComponent(btnArquivo)
-								.addComponent(btnAudio))
-						.addGap(6, 6, 6)));
+						.addPreferredGap(ComponentPlacement.RELATED)
+						.addGroup(jPanel3Layout.createParallelGroup(Alignment.BASELINE).addComponent(btnEnviar)
+								.addComponent(btnLimpar).addComponent(btnArquivo))
+						.addGap(6)));
+		jPanel3.setLayout(jPanel3Layout);
 
 		GroupLayout layout = new GroupLayout(getContentPane());
 		getContentPane().setLayout(layout);

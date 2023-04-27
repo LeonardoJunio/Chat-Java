@@ -68,9 +68,11 @@ public class ClienteFrameService {
 			this.message.setAction(Action.SEND_ALL);
 
 			this.clientService.send(this.message);
+			
+			frame.getTxtAreaReceive().append("You said: " + text + "\n");
 		} else {
 			if (listSelectedUser.size() > 1) {
-				frame.getLabelGrupo().setText("Último Grupo: " + listSelectedUser.toString());
+				frame.getLabelGrupo().setText("Last Group: " + listSelectedUser.toString());
 			}
 
 			// changed text to display all selected users
@@ -86,9 +88,9 @@ public class ClienteFrameService {
 			});
 
 			frame.getListOnlines().clearSelection();
+			frame.getTxtAreaReceive().append("You said: " + textAllUsers + "\n");
 		}
 
-		frame.getTxtAreaReceive().append("Voce disse: " + text + "\n");
 		this.btnLimparActionPerformed(evt);
 	}
 
