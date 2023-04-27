@@ -29,7 +29,6 @@ public class ClienteFrameService {
 		String nameUserConnect = frame.getTxtName().getText();
 
 		if (!nameUserConnect.isEmpty()) {
-			// new instance of chat message when create a new connection (?)
 			this.message = new ChatMessage(nameUserConnect, Action.CONNECT);
 
 			this.clientService = new ClienteService();
@@ -43,10 +42,9 @@ public class ClienteFrameService {
 	}
 
 	public void btnSairActionPerformed(ActionEvent evt) {
-		// why new instance?
 		ChatMessage message = new ChatMessage(this.message.getName(), Action.DISCONNECT);
 		this.clientService.send(message);
-		
+
 		frame.getListOnlines().setListData(new String[0]);
 		listenerSocket.disconnected();
 	}
@@ -64,8 +62,9 @@ public class ClienteFrameService {
 			return;
 		}
 
+		// new instance of ChatMessage because is a new message
 		if (listSelectedUser.isEmpty()) {
-			this.message = new ChatMessage(name, text);// why new instance? and dont send correctly if isolate
+			this.message = new ChatMessage(name, text);
 			this.message.setAction(Action.SEND_ALL);
 
 			this.clientService.send(this.message);
@@ -74,8 +73,12 @@ public class ClienteFrameService {
 				frame.getLabelGrupo().setText("Último Grupo: " + listSelectedUser.toString());
 			}
 
+			// changed text to display all selected users
+			String textAllUsers = frame.getListOnlines().getSelectedValuesList().toString()
+					.replace("[", "(").replace("]", ")").concat(" ").concat(text);
+
 			listSelectedUser.forEach(selectedUser -> {
-				this.message = new ChatMessage(name, text);// why new instance? and dont send correctly if isolate
+				this.message = new ChatMessage(name, textAllUsers);
 				this.message.setNameReserved(selectedUser.toString());
 				this.message.setAction(Action.SEND_ONE);
 

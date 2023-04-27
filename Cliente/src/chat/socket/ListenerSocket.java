@@ -102,7 +102,7 @@ public class ListenerSocket implements Runnable {
 	private void refreshOnlines(ChatMessage message) {
 		Set<String> names = message.getSetOnlines(); // alterar nome variavel 'SetOnlines'?
 
-		// remove of the list the respective user of 'window'
+		// Remove of the list the respective user of 'window'
 		names.remove(message.getName());
 
 		String[] arrayNames = names.toArray(new String[names.size()]);

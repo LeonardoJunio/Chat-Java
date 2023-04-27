@@ -6,7 +6,7 @@
 
 ### :hammer_and_wrench: Tecnologias e Conceitos:
 
-* Java 1.8
+* Java 17
 
 <div align="center" style="display: inline_block">
 	<img src="https://img.shields.io/static/v1?label=Java&message=v1.8&color=B07219&style=flat"/>
@@ -24,10 +24,10 @@
 
 ### :warning: Erros/Aprimoramentos:
 
+* Aplicar a funcionalidade para envio de arquivo (?)
+* Remover botoes desnecessários
 * Melhorar código/estrutura do projeto
 * Tentar utilizar banco de dados, para assim salvar usuarios e historico de conversa. Além disso, carregar o histórico e usuarios
-* Indicar no chat quando uma mensagem for privada e conter quem enviou e pra quem mais foi (no caso de grupo)
-* Aplicar a funcionalidade para envio de arquivo
 * Ajustar para que seja possivel o uso do docker
 * Adicionar imagem do projeto
 * Tentar implementar testes automatizados
