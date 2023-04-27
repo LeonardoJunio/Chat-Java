@@ -1,73 +1,79 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package chat.bean;
 
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
-/**
- *
- * @author usuario
- */
-public class ChatMessage implements Serializable { 
-    private String name;//nome do cliente
-    private String text;//texto da mensagem
-    private String nameReserved; //armazenar o nome do cliente que receberar uma mensagem do tipo reservada
-    private Set<String> setOnlines = new HashSet<String>(); //lista (do tipo String) armazena todos os clientes onlines conectados no servidor
-    private Action action; //para cada mensagem, mostra qual acao vai ser executada baseado no "enum"
+// The same used in project Cliente
+public class ChatMessage implements Serializable {
+	private static final long serialVersionUID = -3029960919914733235L;
 
-    /*
-       Objeto da classe ChatMessage
-    
-    */
-    
-    public String getName() {
-        return name;
-    }
+	private String name;
+	private String text;
+	private String nameReserved; // User name that will receive the private/group message
+	private Set<String> setOnlines; // List with all users on the server
+	private Action action; // Represent the action of each message, based on a Enum
+	
+	public ChatMessage() {
+		this.setOnlines = new HashSet<String>();
+	}
+	
+	public ChatMessage(String name, Action action){
+		this();
+		
+		this.name = name;
+		this.action = action;
+	}
+	
+	public ChatMessage(String name, String text){
+		this();
+		
+		this.name = name;
+		this.text = text;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public String getText() {
-        return text;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public void setText(String text) {
-        this.text = text;
-    }
+	public String getText() {
+		return text;
+	}
 
-    public String getNameReserved() {
-        return nameReserved;
-    }
+	public void setText(String text) {
+		this.text = text;
+	}
 
-    public void setNameReserved(String nameReserved) {
-        this.nameReserved = nameReserved;
-    }
+	public String getNameReserved() {
+		return nameReserved;
+	}
 
-    public Set<String> getSetOnlines() {
-        return setOnlines;
-    }
+	public void setNameReserved(String nameReserved) {
+		this.nameReserved = nameReserved;
+	}
 
-    public void setSetOnlines(Set<String> setOnlines) {
-        this.setOnlines = setOnlines;
-    }
+	public Set<String> getSetOnlines() {
+		return setOnlines;
+	}
 
-    public Action getAction() {
-        return action;
-    }
+	public void setSetOnlines(Set<String> setOnlines) {
+		this.setOnlines = setOnlines;
+	}
 
-    public void setAction(Action action) {
-        this.action = action;
-    }
-    
-    
-    public enum Action{
-        CONNECT, DISCONNECT, SEND_ONE, SEND_ALL, USERS_ONLINE
-    }
-       
+	public Action getAction() {
+		return action;
+	}
+
+	public void setAction(Action action) {
+		this.action = action;
+	}
+
+	public enum Action {
+		CONNECT, DISCONNECT, SEND_ONE, SEND_ALL, USERS_ONLINE
+	}
+
 }

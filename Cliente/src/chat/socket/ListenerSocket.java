@@ -100,7 +100,7 @@ public class ListenerSocket implements Runnable {
 	}
 
 	private void refreshOnlines(ChatMessage message) {
-		Set<String> names = message.getSetOnlines(); // alterar nome variavel 'SetOnlines'?
+		Set<String> names = message.getSetOnlines();
 
 		// Remove of the list the respective user of 'window'
 		names.remove(message.getName());

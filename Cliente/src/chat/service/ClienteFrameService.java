@@ -10,7 +10,6 @@ import chat.frame.ClienteFrame;
 import chat.socket.ListenerSocket;
 
 public class ClienteFrameService {
-
 	private ClienteFrame frame;
 	private ListenerSocket listenerSocket;
 

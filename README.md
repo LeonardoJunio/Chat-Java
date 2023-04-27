@@ -9,7 +9,7 @@
 * Java 17
 
 <div align="center" style="display: inline_block">
-	<img src="https://img.shields.io/static/v1?label=Java&message=v1.8&color=B07219&style=flat"/>
+	<img src="https://img.shields.io/static/v1?label=Java&message=v17&color=B07219&style=flat"/>
 	<img src="https://img.shields.io/static/v1?label=license&message=MIT&color=green&style=flat"/>
 </div>
 
@@ -27,7 +27,7 @@
 * Aplicar a funcionalidade para envio de arquivo (?)
 * Extrair Enum
 * Melhorar código/estrutura do projeto
-* Tentar utilizar banco de dados, para assim salvar usuarios e historico de conversa. Além disso, carregar o histórico e usuarios
+* Arquivo Constansts
 * Ajustar para que seja possivel o uso do docker
 * Adicionar imagem do projeto
 * Tentar implementar testes automatizados

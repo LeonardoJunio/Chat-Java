@@ -7,6 +7,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import chat.bean.ChatMessage;
+import chat.constant.ClienteConstans;
 
 public class ClienteService {
 	private Socket socket;
@@ -15,7 +16,7 @@ public class ClienteService {
 	public Socket connect() {
 		try {
 			// IP and port of connection
-			this.socket = new Socket("localhost", 5555);
+			this.socket = new Socket(ClienteConstans.CLIENT_IP, ClienteConstans.CLIENT_PORT);
 			this.output = new ObjectOutputStream(socket.getOutputStream());
 		} catch (IOException ex) {
 			Logger.getLogger(ClienteService.class.getName()).log(Level.SEVERE, null, ex);

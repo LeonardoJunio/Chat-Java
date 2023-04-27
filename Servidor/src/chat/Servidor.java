@@ -7,18 +7,8 @@ package chat;
 
 import chat.service.ServidorService;
 
-/**
- *
- * @author usuario
- */
 public class Servidor {
-
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
-        new ServidorService(); //instancia do ServidorService
-        
-    }
-    
+        new ServidorService();        
+    }    
 }
