@@ -41,8 +41,8 @@ public class ClienteFrame extends JFrame {
 
 	// Variables declaration - be careful when changing it.
 	// The content of this method is always modified by the Form Editor.
-	private JButton btnArquivo;
-	private JButton btnGrupo;
+	private JButton btnFile;
+	private JButton btnGroup;
 	private JPanel jPanel1;
 	private JPanel jPanel2;
 	private JPanel jPanel3;
@@ -50,14 +50,14 @@ public class ClienteFrame extends JFrame {
 	private JScrollPane jScrollPane2;
 	private JScrollPane jScrollPane3;
 
-	private JButton btnConnectar;
-	private JButton btnEnviar;
-	private JButton btnLimpar;
-	private JButton btnSair;
+	private JButton btnLogin;
+	private JButton btnSend;
+	private JButton btnClear;
+	private JButton btnLogout;
 	private JTextField txtName;
 	private JTextArea txtAreaReceive;
 	private JTextArea txtAreaSend;
-	private JLabel labelGrupo;
+	private JLabel labelGroup;
 	private JList<Object> listOnlines;
 
 	/**
@@ -67,21 +67,21 @@ public class ClienteFrame extends JFrame {
 	private void initComponents() {
 		jPanel1 = new JPanel();
 		txtName = new JTextField();
-		btnConnectar = new JButton();
-		btnSair = new JButton();
+		btnLogin = new JButton();
+		btnLogout = new JButton();
 		jPanel2 = new JPanel();
 		jScrollPane3 = new JScrollPane();
 		listOnlines = new JList<>();
-		btnGrupo = new JButton();
+		btnGroup = new JButton();
 		jPanel3 = new JPanel();
 		jScrollPane1 = new JScrollPane();
 		txtAreaReceive = new JTextArea();
 		jScrollPane2 = new JScrollPane();
 		txtAreaSend = new JTextArea();
-		btnEnviar = new JButton();
-		btnLimpar = new JButton();
-		btnArquivo = new JButton();
-		labelGrupo = new JLabel();
+		btnSend = new JButton();
+		btnClear = new JButton();
+		btnFile = new JButton();
+		labelGroup = new JLabel();
 
 		txtAreaReceive.setLineWrap(true);
 		txtAreaSend.setLineWrap(true);
@@ -89,21 +89,21 @@ public class ClienteFrame extends JFrame {
 
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
-		jPanel1.setBorder(new TitledBorder(new LineBorder(new Color(184, 207, 229)), "Login", TitledBorder.LEADING,
+		jPanel1.setBorder(new TitledBorder(new LineBorder(new Color(184, 207, 229)), "Connect", TitledBorder.LEADING,
 				TitledBorder.TOP, null, new Color(51, 51, 51)));
 
-		btnConnectar.setText("Connectar");
-		btnConnectar.addActionListener(new ActionListener() {
+		btnLogin.setText("Login");
+		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent evt) {
-				service.btnConnectarActionPerformed(evt);
+				service.btnLoginActionPerformed(evt);
 			}
 		});
 
-		btnSair.setText("Logout");
-		btnSair.setEnabled(false);
-		btnSair.addActionListener(new ActionListener() {
+		btnLogout.setText("Logout");
+		btnLogout.setEnabled(false);
+		btnLogout.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent evt) {
-				service.btnSairActionPerformed(evt);
+				service.btnLogoutActionPerformed(evt);
 			}
 		});
 
@@ -111,24 +111,24 @@ public class ClienteFrame extends JFrame {
 		jPanel1.setLayout(jPanel1Layout);
 		jPanel1Layout.setHorizontalGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
 				.addGroup(jPanel1Layout.createSequentialGroup().addContainerGap().addComponent(txtName)
-						.addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED).addComponent(btnConnectar)
-						.addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED).addComponent(btnSair)
+						.addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED).addComponent(btnLogin)
+						.addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED).addComponent(btnLogout)
 						.addGap(6, 6, 6)));
 		jPanel1Layout.setVerticalGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
 				.addGroup(jPanel1Layout.createSequentialGroup()
 						.addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
 								.addComponent(txtName, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
 										GroupLayout.PREFERRED_SIZE)
-								.addComponent(btnConnectar).addComponent(btnSair))
+								.addComponent(btnLogin).addComponent(btnLogout))
 						.addGap(0, 8, Short.MAX_VALUE)));
 
 		jPanel2.setBorder(BorderFactory.createTitledBorder("Onlines"));
 
 		jScrollPane3.setViewportView(listOnlines);
 
-		btnGrupo.setText("Group");
-		btnGrupo.setEnabled(false);
-		btnGrupo.setVisible(false);
+		btnGroup.setText("Group");
+		btnGroup.setEnabled(false);
+		btnGroup.setVisible(false);
 
 		GroupLayout jPanel2Layout = new GroupLayout(jPanel2);
 		jPanel2.setLayout(jPanel2Layout);
@@ -136,11 +136,11 @@ public class ClienteFrame extends JFrame {
 				.addGroup(jPanel2Layout.createSequentialGroup().addContainerGap()
 						.addGroup(jPanel2Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
 								.addComponent(jScrollPane3, GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE).addComponent(
-										btnGrupo, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+										btnGroup, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 						.addContainerGap()));
 		jPanel2Layout.setVerticalGroup(jPanel2Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
 				.addGroup(jPanel2Layout.createSequentialGroup().addComponent(jScrollPane3)
-						.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED).addComponent(btnGrupo)));
+						.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED).addComponent(btnGroup)));
 
 		jPanel3.setBorder(BorderFactory.createEtchedBorder());
 
@@ -155,27 +155,27 @@ public class ClienteFrame extends JFrame {
 		txtAreaSend.setEnabled(false);
 		jScrollPane2.setViewportView(txtAreaSend);
 
-		btnEnviar.setText("Send");
-		btnEnviar.setEnabled(false);
-		btnEnviar.addActionListener(new ActionListener() {
+		btnSend.setText("Send");
+		btnSend.setEnabled(false);
+		btnSend.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent evt) {
-				service.btnEnviarActionPerformed(evt);
+				service.btnSendActionPerformed(evt);
 			}
 		});
 
-		btnLimpar.setText("Clear");
-		btnLimpar.setEnabled(false);
-		btnLimpar.addActionListener(new ActionListener() {
+		btnClear.setText("Clear");
+		btnClear.setEnabled(false);
+		btnClear.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent evt) {
-				service.btnLimparActionPerformed(evt);
+				service.btnClearActionPerformed(evt);
 			}
 		});
 
-		btnArquivo.setText("File");
-		btnArquivo.setEnabled(false);
+		btnFile.setText("File");
+		btnFile.setEnabled(false);
 
-		labelGrupo.setFont(new Font("Ubuntu", 0, 14)); // NOI18N
-		labelGrupo.setText("Last Group: ---");
+		labelGroup.setFont(new Font("Ubuntu", 0, 14)); // NOI18N
+		labelGroup.setText("Last Group: ---");
 
 		GroupLayout jPanel3Layout = new GroupLayout(jPanel3);
 		jPanel3Layout.setHorizontalGroup(jPanel3Layout.createParallelGroup(Alignment.LEADING)
@@ -185,22 +185,22 @@ public class ClienteFrame extends JFrame {
 										GroupLayout.PREFERRED_SIZE)
 								.addComponent(jScrollPane2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
 										GroupLayout.PREFERRED_SIZE)
-								.addGroup(jPanel3Layout.createSequentialGroup().addComponent(btnArquivo)
+								.addGroup(jPanel3Layout.createSequentialGroup().addComponent(btnFile)
 										.addPreferredGap(ComponentPlacement.RELATED, 110, Short.MAX_VALUE)
-										.addComponent(btnLimpar).addPreferredGap(ComponentPlacement.UNRELATED)
-										.addComponent(btnEnviar))
-								.addGroup(jPanel3Layout.createSequentialGroup().addComponent(labelGrupo).addGap(0, 262,
+										.addComponent(btnClear).addPreferredGap(ComponentPlacement.UNRELATED)
+										.addComponent(btnSend))
+								.addGroup(jPanel3Layout.createSequentialGroup().addComponent(labelGroup).addGap(0, 262,
 										Short.MAX_VALUE)))
 						.addContainerGap()));
 		jPanel3Layout.setVerticalGroup(jPanel3Layout.createParallelGroup(Alignment.LEADING)
 				.addGroup(jPanel3Layout.createSequentialGroup().addContainerGap()
 						.addComponent(jScrollPane1, GroupLayout.PREFERRED_SIZE, 179, GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(ComponentPlacement.RELATED).addComponent(labelGrupo)
+						.addPreferredGap(ComponentPlacement.RELATED).addComponent(labelGroup)
 						.addPreferredGap(ComponentPlacement.RELATED)
 						.addComponent(jScrollPane2, GroupLayout.PREFERRED_SIZE, 61, GroupLayout.PREFERRED_SIZE)
 						.addPreferredGap(ComponentPlacement.RELATED)
-						.addGroup(jPanel3Layout.createParallelGroup(Alignment.BASELINE).addComponent(btnEnviar)
-								.addComponent(btnLimpar).addComponent(btnArquivo))
+						.addGroup(jPanel3Layout.createParallelGroup(Alignment.BASELINE).addComponent(btnSend)
+								.addComponent(btnClear).addComponent(btnFile))
 						.addGap(6)));
 		jPanel3.setLayout(jPanel3Layout);
 
@@ -229,20 +229,20 @@ public class ClienteFrame extends JFrame {
 		pack();
 	}
 
-	public JButton getBtnConnectar() {
-		return btnConnectar;
+	public JButton getBtnLogin() {
+		return btnLogin;
 	}
 
-	public JButton getBtnEnviar() {
-		return btnEnviar;
+	public JButton getBtnSend() {
+		return btnSend;
 	}
 
-	public JButton getBtnLimpar() {
-		return btnLimpar;
+	public JButton getBtnClear() {
+		return btnClear;
 	}
 
-	public JButton getBtnSair() {
-		return btnSair;
+	public JButton getBtnLogout() {
+		return btnLogout;
 	}
 
 	public JTextField getTxtName() {
@@ -257,8 +257,8 @@ public class ClienteFrame extends JFrame {
 		return txtAreaSend;
 	}
 
-	public JLabel getLabelGrupo() {
-		return labelGrupo;
+	public JLabel getLabelGroup() {
+		return labelGroup;
 	}
 
 	public JList<Object> getListOnlines() {

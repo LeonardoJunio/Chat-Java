@@ -41,7 +41,6 @@ public class Cliente {
 				
 //				ClienteFrame clienteFrame = new ClienteFrame();
 //				clienteFrame.setVisible(true);
-
 			}
 		});
 	}

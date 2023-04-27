@@ -52,7 +52,7 @@ public class ListenerSocket implements Runnable {
 				} else if (action.equals(Action.USERS_ONLINE)) {
 					refreshOnlines(message);
 				}
-				// the server doesn't send "SEND_ALL". This one is many "SEND_ONE"
+				// the server doesn't send "SEND_ALL". This is many "SEND_ONE"
 			}
 		} catch (IOException | ClassNotFoundException ex) {
 			Logger.getLogger(ClienteFrame.class.getName()).log(Level.SEVERE, null, ex);
@@ -62,41 +62,41 @@ public class ListenerSocket implements Runnable {
 	private void connected(ChatMessage message) {
 		if (message.getText().equals("NO")) {
 			frame.getTxtName().setText("");
-			JOptionPane.showMessageDialog(frame, "Conexão não realizada. \nTente novamente com um novo nome.");
+			JOptionPane.showMessageDialog(frame, "Connection error. \nTry again, may with a new name, please.");
 			return;
 		}
 
 		frameService.message = message;
-		frame.getBtnConnectar().setEnabled(false);
+		frame.getBtnLogin().setEnabled(false);
 		frame.getTxtName().setEditable(false);
 
 		frame.getTxtAreaReceive().setEnabled(true);
-		frame.getBtnSair().setEnabled(true);
+		frame.getBtnLogout().setEnabled(true);
 		frame.getTxtAreaSend().setEnabled(true);
-		frame.getBtnEnviar().setEnabled(true);
-		frame.getBtnLimpar().setEnabled(true);
+		frame.getBtnSend().setEnabled(true);
+		frame.getBtnClear().setEnabled(true);
 
-		JOptionPane.showMessageDialog(frame, "Voce está conectado no chat!");
+		JOptionPane.showMessageDialog(frame, "You've joined the chat!");
 	}
 
 	public void disconnected() {
-		frame.getBtnConnectar().setEnabled(true);
+		frame.getBtnLogin().setEnabled(true);
 		frame.getTxtName().setEditable(true);
 
 		frame.getTxtAreaReceive().setEnabled(false);
-		frame.getBtnSair().setEnabled(false);
+		frame.getBtnLogout().setEnabled(false);
 		frame.getTxtAreaSend().setEnabled(false);
-		frame.getBtnEnviar().setEnabled(false);
-		frame.getBtnLimpar().setEnabled(false);
+		frame.getBtnSend().setEnabled(false);
+		frame.getBtnClear().setEnabled(false);
 
 		frame.getTxtAreaReceive().setText("");
 		frame.getTxtAreaSend().setText("");
 
-		JOptionPane.showMessageDialog(frame, "Voce saiu do chat!");
+		JOptionPane.showMessageDialog(frame, "You've left the chat!");
 	}
 
 	private void receive(ChatMessage message) {
-		frame.getTxtAreaReceive().append(message.getName() + " diz: " + message.getText() + "\n");
+		frame.getTxtAreaReceive().append(message.getName() + " said: " + message.getText() + "\n");
 	}
 
 	private void refreshOnlines(ChatMessage message) {

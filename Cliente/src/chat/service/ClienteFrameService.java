@@ -24,7 +24,7 @@ public class ClienteFrameService {
 		}
 	}
 
-	public void btnConnectarActionPerformed(ActionEvent evt) {
+	public void btnLoginActionPerformed(ActionEvent evt) {
 		// name of user typed on interface, to connect
 		String nameUserConnect = frame.getTxtName().getText();
 
@@ -41,7 +41,7 @@ public class ClienteFrameService {
 		}
 	}
 
-	public void btnSairActionPerformed(ActionEvent evt) {
+	public void btnLogoutActionPerformed(ActionEvent evt) {
 		ChatMessage message = new ChatMessage(this.message.getName(), Action.DISCONNECT);
 		this.clientService.send(message);
 
@@ -49,11 +49,11 @@ public class ClienteFrameService {
 		listenerSocket.disconnected();
 	}
 
-	public void btnLimparActionPerformed(ActionEvent evt) {
+	public void btnClearActionPerformed(ActionEvent evt) {
 		frame.getTxtAreaSend().setText("");
 	}
 
-	public void btnEnviarActionPerformed(ActionEvent evt) {
+	public void btnSendActionPerformed(ActionEvent evt) {
 		String text = frame.getTxtAreaSend().getText();
 		String name = this.message.getName();
 		List<Object> listSelectedUser = frame.getListOnlines().getSelectedValuesList();
@@ -72,7 +72,7 @@ public class ClienteFrameService {
 			frame.getTxtAreaReceive().append("You said: " + text + "\n");
 		} else {
 			if (listSelectedUser.size() > 1) {
-				frame.getLabelGrupo().setText("Last Group: " + listSelectedUser.toString());
+				frame.getLabelGroup().setText("Last Group: " + listSelectedUser.toString());
 			}
 
 			// changed text to display all selected users
@@ -91,7 +91,7 @@ public class ClienteFrameService {
 			frame.getTxtAreaReceive().append("You said: " + textAllUsers + "\n");
 		}
 
-		this.btnLimparActionPerformed(evt);
+		this.btnClearActionPerformed(evt);
 	}
 
 	public ClienteFrame getFrame() {

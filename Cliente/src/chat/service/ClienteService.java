@@ -14,7 +14,7 @@ public class ClienteService {
 
 	public Socket connect() {
 		try {
-			// ip and port of connection
+			// IP and port of connection
 			this.socket = new Socket("localhost", 5555);
 			this.output = new ObjectOutputStream(socket.getOutputStream());
 		} catch (IOException ex) {
