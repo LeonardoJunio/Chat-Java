@@ -95,6 +95,7 @@ public class ListenerSocket implements Runnable {
 
 		frame.getTxtAreaReceive().setText("");
 		frame.getTxtAreaSend().setText("");
+		frame.getLabelGroup().setText("Last Group: ---");
 
 		JOptionPane.showMessageDialog(frame, "You've left the chat!");
 	}

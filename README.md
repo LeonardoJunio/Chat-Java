@@ -1,10 +1,10 @@
-<h1 align="center">Chat Java</h1>
+<h1 align="center">Chat - Java</h1>
 
-<p align="center">Chat entre usuários, como um chat em grupo, mas podendo enviar mensagem privada</p>
+<p align="center">Chat between users, like a group chat, but you can send a private message to 1 or more users</p>
 
 <hr> 
 
-### :hammer_and_wrench: Tecnologias e Conceitos:
+### :hammer_and_wrench: Technologies & Concepts:
 
 * Java 17
 
@@ -13,30 +13,24 @@
 	<img src="https://img.shields.io/static/v1?label=license&message=MIT&color=green&style=flat"/>
 </div>
 
-### :gear: Configurações:
+### :gear: Settings:
 
-* Projeto Servidor - Iniciar o servidor 
+* Project Servidor - Starting the server
 	* Run as Java Application
-* Projeto Cliente - Iniciar um ou mais clientes 
+* Project Cliente - Start one or more clients 
 	* Run as Java Application (Cliente)
-* Obs: Testes feitos com o eclipse (carregar como projetos distintos)
-* Obs 2: Para editar o frame visualmente, necessário plugin WindowBuilder (instalavel pelo Eclipse Marketplace) e abrir como WindowBuilderEditor (aba inferior 'Design')
+* Obs: Tests done with eclipse (load as separate projects)
+* Obs 2: To edit the frame visually, you need the WindowBuilder plugin (installable from Eclipse Marketplace) and open it as WindowBuilderEditor (bottom tab 'Design')
 
-### :warning: Erros/Aprimoramentos:
+### :warning: Errors/Improvements:
 
-* Melhorar código/estrutura do projeto
-* Arquivo Constansts
-* Transferir para inglês(?)
-* Tela fica deformando quando nome de usuario é grande e é selecionado para mensagem em grupo
 * Aplicar a funcionalidade para envio de arquivo (teria caminho padrao e pasta com nome de cada usuario pra simular) (?)
-* Adicionar imagem do projeto
-* Ajustar para que seja possivel o uso do docker
-* Tentar implementar testes automatizados
-
+* Add project image
+* Adjust project to be able to use docker
 
 
 ##
 
 <div align="center">
-	<p>Feito com :computer: + :heart: por Leonardo Junio</p>
+	<p>Made with :computer: + :heart: by Leonardo Junio</p>
 </div>

@@ -29,7 +29,7 @@ public class ClienteFrame extends JFrame {
 
 	ClienteFrameService service;
 
-	/** Creates new form ClienteFrame with a service and the frame components*/
+	/** Creates new form ClienteFrame with a service and the frame components */
 	public ClienteFrame() {
 		if (this.service == null) {
 			this.service = new ClienteFrameService(this);
@@ -48,6 +48,10 @@ public class ClienteFrame extends JFrame {
 	private JScrollPane jScrollPane1;
 	private JScrollPane jScrollPane2;
 	private JScrollPane jScrollPane3;
+	private GroupLayout jPanel1Layout;
+	private GroupLayout jPanel2Layout;
+	private GroupLayout jPanel3Layout;
+	private JLabel labelNickname;
 
 	private JButton btnLogin;
 	private JButton btnSend;
@@ -81,6 +85,11 @@ public class ClienteFrame extends JFrame {
 		btnClear = new JButton();
 		btnFile = new JButton();
 		labelGroup = new JLabel();
+		labelNickname = new JLabel();
+
+		jPanel1Layout = new GroupLayout(jPanel1);
+		jPanel2Layout = new GroupLayout(jPanel2);
+		jPanel3Layout = new GroupLayout(jPanel3);
 
 		txtAreaReceive.setLineWrap(true);
 		txtAreaSend.setLineWrap(true);
@@ -106,20 +115,27 @@ public class ClienteFrame extends JFrame {
 			}
 		});
 
-		GroupLayout jPanel1Layout = new GroupLayout(jPanel1);
-		jPanel1.setLayout(jPanel1Layout);
-		jPanel1Layout.setHorizontalGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-				.addGroup(jPanel1Layout.createSequentialGroup().addContainerGap().addComponent(txtName)
-						.addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED).addComponent(btnLogin)
-						.addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED).addComponent(btnLogout)
-						.addGap(6, 6, 6)));
-		jPanel1Layout.setVerticalGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+		labelNickname.setText("Nickname:");
+		labelNickname.setFont(new Font("Ubuntu", Font.PLAIN, 14));
+
+		jPanel1Layout.setHorizontalGroup(jPanel1Layout.createParallelGroup(Alignment.LEADING)
+				.addGroup(jPanel1Layout.createSequentialGroup().addGap(37)
+						.addComponent(labelNickname, GroupLayout.PREFERRED_SIZE, 68, GroupLayout.PREFERRED_SIZE)
+						.addPreferredGap(ComponentPlacement.RELATED)
+						.addComponent(txtName, GroupLayout.PREFERRED_SIZE, 219, GroupLayout.PREFERRED_SIZE).addGap(18)
+						.addComponent(btnLogin).addPreferredGap(ComponentPlacement.RELATED).addComponent(btnLogout)));
+
+		jPanel1Layout.setVerticalGroup(jPanel1Layout.createParallelGroup(Alignment.LEADING)
 				.addGroup(jPanel1Layout.createSequentialGroup()
-						.addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+						.addGroup(jPanel1Layout.createParallelGroup(Alignment.BASELINE)
 								.addComponent(txtName, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
 										GroupLayout.PREFERRED_SIZE)
-								.addComponent(btnLogin).addComponent(btnLogout))
-						.addGap(0, 8, Short.MAX_VALUE)));
+								.addComponent(btnLogout)
+								.addComponent(labelNickname, GroupLayout.PREFERRED_SIZE, 16, GroupLayout.PREFERRED_SIZE)
+								.addComponent(btnLogin))
+						.addContainerGap(20, Short.MAX_VALUE)));
+
+		jPanel1.setLayout(jPanel1Layout);
 
 		jPanel2.setBorder(BorderFactory.createTitledBorder("Onlines"));
 
@@ -129,14 +145,15 @@ public class ClienteFrame extends JFrame {
 		btnGroup.setEnabled(false);
 		btnGroup.setVisible(false);
 
-		GroupLayout jPanel2Layout = new GroupLayout(jPanel2);
 		jPanel2.setLayout(jPanel2Layout);
+		
 		jPanel2Layout.setHorizontalGroup(jPanel2Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
 				.addGroup(jPanel2Layout.createSequentialGroup().addContainerGap()
 						.addGroup(jPanel2Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
 								.addComponent(jScrollPane3, GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE).addComponent(
 										btnGroup, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 						.addContainerGap()));
+
 		jPanel2Layout.setVerticalGroup(jPanel2Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
 				.addGroup(jPanel2Layout.createSequentialGroup().addComponent(jScrollPane3)
 						.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED).addComponent(btnGroup)));
@@ -176,21 +193,21 @@ public class ClienteFrame extends JFrame {
 		labelGroup.setFont(new Font("Ubuntu", 0, 14)); // NOI18N
 		labelGroup.setText("Last Group: ---");
 
-		GroupLayout jPanel3Layout = new GroupLayout(jPanel3);
 		jPanel3Layout.setHorizontalGroup(jPanel3Layout.createParallelGroup(Alignment.LEADING)
 				.addGroup(jPanel3Layout.createSequentialGroup().addContainerGap()
-						.addGroup(jPanel3Layout.createParallelGroup(Alignment.TRAILING)
-								.addComponent(jScrollPane1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-										GroupLayout.PREFERRED_SIZE)
-								.addComponent(jScrollPane2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-										GroupLayout.PREFERRED_SIZE)
-								.addGroup(jPanel3Layout.createSequentialGroup().addComponent(btnFile)
-										.addPreferredGap(ComponentPlacement.RELATED, 110, Short.MAX_VALUE)
-										.addComponent(btnClear).addPreferredGap(ComponentPlacement.UNRELATED)
-										.addComponent(btnSend))
-								.addGroup(jPanel3Layout.createSequentialGroup().addComponent(labelGroup).addGap(0, 262,
-										Short.MAX_VALUE)))
+						.addGroup(jPanel3Layout.createParallelGroup(Alignment.LEADING)
+								.addComponent(labelGroup, GroupLayout.DEFAULT_SIZE, 388, Short.MAX_VALUE)
+								.addComponent(jScrollPane1, Alignment.TRAILING, GroupLayout.PREFERRED_SIZE,
+										GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addComponent(jScrollPane2, Alignment.TRAILING, GroupLayout.PREFERRED_SIZE,
+										GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addGroup(Alignment.TRAILING,
+										jPanel3Layout.createSequentialGroup().addComponent(btnFile)
+												.addPreferredGap(ComponentPlacement.RELATED, 176, Short.MAX_VALUE)
+												.addComponent(btnClear).addPreferredGap(ComponentPlacement.UNRELATED)
+												.addComponent(btnSend)))
 						.addContainerGap()));
+
 		jPanel3Layout.setVerticalGroup(jPanel3Layout.createParallelGroup(Alignment.LEADING)
 				.addGroup(jPanel3Layout.createSequentialGroup().addContainerGap()
 						.addComponent(jScrollPane1, GroupLayout.PREFERRED_SIZE, 179, GroupLayout.PREFERRED_SIZE)
@@ -201,29 +218,34 @@ public class ClienteFrame extends JFrame {
 						.addGroup(jPanel3Layout.createParallelGroup(Alignment.BASELINE).addComponent(btnSend)
 								.addComponent(btnClear).addComponent(btnFile))
 						.addGap(6)));
+
 		jPanel3.setLayout(jPanel3Layout);
 
 		GroupLayout layout = new GroupLayout(getContentPane());
-		getContentPane().setLayout(layout);
-		layout.setHorizontalGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING).addGroup(layout
-				.createSequentialGroup().addContainerGap()
-				.addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
-						.addComponent(jPanel1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-						.addGroup(layout.createSequentialGroup()
-								.addComponent(jPanel3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-										GroupLayout.PREFERRED_SIZE)
-								.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED).addComponent(jPanel2,
-										GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-										GroupLayout.PREFERRED_SIZE)))
+
+		layout.setHorizontalGroup(layout.createParallelGroup(Alignment.LEADING).addGroup(layout.createSequentialGroup()
+				.addContainerGap()
+				.addGroup(layout.createParallelGroup(Alignment.TRAILING)
+						.addComponent(jPanel1, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE,
+								Short.MAX_VALUE)
+						.addGroup(Alignment.LEADING,
+								layout.createSequentialGroup()
+										.addComponent(jPanel3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+												GroupLayout.PREFERRED_SIZE)
+										.addPreferredGap(ComponentPlacement.RELATED).addComponent(jPanel2,
+												GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+												GroupLayout.PREFERRED_SIZE)))
 				.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
-		layout.setVerticalGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING).addGroup(layout
-				.createSequentialGroup()
-				.addComponent(jPanel1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-				.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-				.addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-						.addComponent(jPanel2, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+
+		layout.setVerticalGroup(layout.createParallelGroup(Alignment.LEADING).addGroup(layout.createSequentialGroup()
+				.addComponent(jPanel1, GroupLayout.PREFERRED_SIZE, 55, GroupLayout.PREFERRED_SIZE)
+				.addPreferredGap(ComponentPlacement.RELATED)
+				.addGroup(layout.createParallelGroup(Alignment.LEADING)
+						.addComponent(jPanel2, GroupLayout.DEFAULT_SIZE, 321, Short.MAX_VALUE)
 						.addComponent(jPanel3, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 				.addContainerGap()));
+
+		getContentPane().setLayout(layout);
 
 		pack();
 	}

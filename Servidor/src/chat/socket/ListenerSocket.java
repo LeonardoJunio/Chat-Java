@@ -135,7 +135,7 @@ public class ListenerSocket implements Runnable {
 				message.setAction(Action.SEND_ONE);
 
 				try {
-					// value has the ObjectOutputStream
+					// Value has the ObjectOutputStream
 					kv.getValue().writeObject(message);
 				} catch (IOException ex) {
 					Logger.getLogger(ServidorService.class.getName()).log(Level.SEVERE, null, ex);
