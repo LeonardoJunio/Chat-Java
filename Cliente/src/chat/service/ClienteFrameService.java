@@ -24,7 +24,7 @@ public class ClienteFrameService {
 	}
 
 	public void btnLoginActionPerformed(ActionEvent evt) {
-		// name of user typed on interface, to connect
+		// Name of user typed on interface, to connect
 		String nameUserConnect = frame.getTxtName().getText();
 
 		if (!nameUserConnect.isEmpty()) {
@@ -45,6 +45,7 @@ public class ClienteFrameService {
 		this.clientService.send(message);
 
 		frame.getListOnlines().setListData(new String[0]);
+		
 		listenerSocket.disconnected();
 	}
 
@@ -61,7 +62,7 @@ public class ClienteFrameService {
 			return;
 		}
 
-		// new instance of ChatMessage because is a new message
+		// New instance of ChatMessage because is a new message
 		if (listSelectedUser.isEmpty()) {
 			this.message = new ChatMessage(name, text);
 			this.message.setAction(Action.SEND_ALL);
@@ -74,7 +75,7 @@ public class ClienteFrameService {
 				frame.getLabelGroup().setText("Last Group: " + listSelectedUser.toString());
 			}
 
-			// changed text to display all selected users
+			// Changed text to display all selected users
 			String textAllUsers = frame.getListOnlines().getSelectedValuesList().toString()
 					.replace("[", "(").replace("]", ")").concat(" ").concat(text);
 
@@ -100,5 +101,4 @@ public class ClienteFrameService {
 	public Socket getSocket() {
 		return socket;
 	}
-
 }

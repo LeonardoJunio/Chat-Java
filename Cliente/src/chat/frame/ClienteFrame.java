@@ -24,7 +24,6 @@ import javax.swing.border.TitledBorder;
 import javax.swing.border.LineBorder;
 import java.awt.Color;
 
-
 public class ClienteFrame extends JFrame {
 	private static final long serialVersionUID = -8895033625174605700L;
 

@@ -13,11 +13,11 @@ import javax.swing.ListSelectionModel;
 
 import chat.bean.ChatMessage;
 import chat.bean.ChatMessage.Action;
+import chat.constant.ClienteConstans;
 import chat.frame.ClienteFrame;
 import chat.service.ClienteFrameService;
 
 public class ListenerSocket implements Runnable {
-
 	private ClienteFrame frame;
 	private ClienteFrameService frameService;
 
@@ -40,7 +40,8 @@ public class ListenerSocket implements Runnable {
 
 		try {
 			while ((message = (ChatMessage) input.readObject()) != null) {
-				Action action = message.getAction(); // Get the action sent by the server
+				// Get the action sent by the server
+				Action action = message.getAction();
 
 				if (action.equals(Action.CONNECT)) {
 					connected(message);
@@ -52,7 +53,7 @@ public class ListenerSocket implements Runnable {
 				} else if (action.equals(Action.USERS_ONLINE)) {
 					refreshOnlines(message);
 				}
-				// the server doesn't send "SEND_ALL". This is many "SEND_ONE"
+				// The server doesn't send "SEND_ALL". This is many "SEND_ONE"
 			}
 		} catch (IOException | ClassNotFoundException ex) {
 			Logger.getLogger(ClienteFrame.class.getName()).log(Level.SEVERE, null, ex);
@@ -60,13 +61,16 @@ public class ListenerSocket implements Runnable {
 	}
 
 	private void connected(ChatMessage message) {
-		if (message.getText().equals("NO")) {
+		if (message.getText().equals(ClienteConstans.CONNECTION_ERROR)) {
 			frame.getTxtName().setText("");
+
 			JOptionPane.showMessageDialog(frame, "Connection error. \nTry again, may with a new name, please.");
+
 			return;
 		}
 
 		frameService.message = message;
+
 		frame.getBtnLogin().setEnabled(false);
 		frame.getTxtName().setEditable(false);
 

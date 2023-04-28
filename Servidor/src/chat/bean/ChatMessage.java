@@ -4,30 +4,33 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
-// The same used in project Cliente
+// Equal to the one used in project Cliente
 public class ChatMessage implements Serializable {
 	private static final long serialVersionUID = -3029960919914733235L;
 
 	private String name;
 	private String text;
-	private String nameReserved; // User name that will receive the private/group message
-	private Set<String> setOnlines; // List with all users on the server
-	private Action action; // Represent the action of each message, based on a Enum
-	
+	// User name that will receive the private/group message
+	private String nameReserved;
+	// List with all users on the server
+	private Set<String> setOnlines;
+	// Represent the action of each message, based on a Enum
+	private Action action;
+
 	public ChatMessage() {
 		this.setOnlines = new HashSet<String>();
 	}
-	
-	public ChatMessage(String name, Action action){
+
+	public ChatMessage(String name, Action action) {
 		this();
-		
+
 		this.name = name;
 		this.action = action;
 	}
-	
-	public ChatMessage(String name, String text){
+
+	public ChatMessage(String name, String text) {
 		this();
-		
+
 		this.name = name;
 		this.text = text;
 	}
@@ -75,5 +78,4 @@ public class ChatMessage implements Serializable {
 	public enum Action {
 		CONNECT, DISCONNECT, SEND_ONE, SEND_ALL, USERS_ONLINE
 	}
-
 }

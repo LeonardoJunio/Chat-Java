@@ -24,14 +24,15 @@
 
 ### :warning: Erros/Aprimoramentos:
 
-* Aplicar a funcionalidade para envio de arquivo (?)
-* Extrair Enum
 * Melhorar código/estrutura do projeto
 * Arquivo Constansts
-* Ajustar para que seja possivel o uso do docker
-* Adicionar imagem do projeto
-* Tentar implementar testes automatizados
 * Transferir para inglês(?)
+* Tela fica deformando quando nome de usuario é grande e é selecionado para mensagem em grupo
+* Aplicar a funcionalidade para envio de arquivo (teria caminho padrao e pasta com nome de cada usuario pra simular) (?)
+* Adicionar imagem do projeto
+* Ajustar para que seja possivel o uso do docker
+* Tentar implementar testes automatizados
+
 
 
 ##

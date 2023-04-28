@@ -38,9 +38,6 @@ public class Cliente {
 			public void run() {
 				// Work as a Model and a Controller at same time
 				new ClienteFrame().setVisible(true);
-				
-//				ClienteFrame clienteFrame = new ClienteFrame();
-//				clienteFrame.setVisible(true);
 			}
 		});
 	}
