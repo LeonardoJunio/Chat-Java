@@ -29,10 +29,14 @@
 * exceções
 * Mensagens de erros/aviso
 * Listar em Last Group somente os 5 primeiros caracteres de cada nome
+* Usar trim nos textos
+* Ajustar pra pasta que armazena arquivo ser dentro do projeto, mas sem ter caminho manualmente (System.getProperty ?)
 * Criar uma herança com message + chat e arquivo
 * Aplicar a funcionalidade para envio de arquivo (teria caminho padrao e pasta com nome de cada usuario pra simular) (?)
-* Melhora da estrutura de código
 * Ajustar para o processamento principal ficar do lado do servidor, assim enviaria uma lista de mensagens+arquivo para ele processar/enviar/salvar
+* Historico de conversação salva em texto
+* Metodos com 1 funcionalidade?
+* Melhora da estrutura de código
 * Add project image
 * Adjust project to be able to use docker
 
