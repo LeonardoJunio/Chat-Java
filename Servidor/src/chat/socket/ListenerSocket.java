@@ -128,7 +128,7 @@ public class ListenerSocket implements Runnable {
 	}
 
 	private void sendAll(ChatMessage message) {
-		// Get each message output (String-key; Object-value)
+		// Get each message output (String-key; Object-value) of each user online
 		for (Map.Entry<String, ObjectOutputStream> kv : mapOnlines.entrySet()) {
 			// Does not send the message to the sender
 			if (!kv.getKey().equals(message.getName())) {

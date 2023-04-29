@@ -40,7 +40,6 @@ public class ClienteFrame extends JFrame {
 
 	// Variables declaration - be careful when changing it.
 	// The content of this method is always modified by the Form Editor.
-	private JButton btnFile;
 	private JButton btnGroup;
 	private JPanel jPanel1;
 	private JPanel jPanel2;
@@ -53,6 +52,7 @@ public class ClienteFrame extends JFrame {
 	private GroupLayout jPanel3Layout;
 	private JLabel labelNickname;
 
+	private JButton btnFile;
 	private JButton btnLogin;
 	private JButton btnSend;
 	private JButton btnClear;
@@ -189,6 +189,11 @@ public class ClienteFrame extends JFrame {
 
 		btnFile.setText("File");
 		btnFile.setEnabled(false);
+		btnFile.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
+				service.btnSendFileActionPerformed(evt);
+			}
+		});
 
 		labelGroup.setFont(new Font("Ubuntu", 0, 14)); // NOI18N
 		labelGroup.setText("Last Group: ---");
@@ -281,7 +286,11 @@ public class ClienteFrame extends JFrame {
 	public JLabel getLabelGroup() {
 		return labelGroup;
 	}
-
+	
+	public JButton getBtnFile() {
+		return btnFile;
+	}
+	
 	public JList<Object> getListOnlines() {
 		return listOnlines;
 	}

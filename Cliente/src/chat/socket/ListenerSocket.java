@@ -79,6 +79,7 @@ public class ListenerSocket implements Runnable {
 		frame.getTxtAreaSend().setEnabled(true);
 		frame.getBtnSend().setEnabled(true);
 		frame.getBtnClear().setEnabled(true);
+		frame.getBtnFile().setEnabled(true);
 
 		JOptionPane.showMessageDialog(frame, "You've joined the chat!");
 	}
@@ -92,7 +93,8 @@ public class ListenerSocket implements Runnable {
 		frame.getTxtAreaSend().setEnabled(false);
 		frame.getBtnSend().setEnabled(false);
 		frame.getBtnClear().setEnabled(false);
-
+		frame.getBtnFile().setEnabled(false);
+		
 		frame.getTxtAreaReceive().setText("");
 		frame.getTxtAreaSend().setText("");
 		frame.getLabelGroup().setText("Last Group: ---");
@@ -101,7 +103,16 @@ public class ListenerSocket implements Runnable {
 	}
 
 	private void receive(ChatMessage message) {
-		frame.getTxtAreaReceive().append(message.getName() + " said: " + message.getText() + "\n");
+		StringBuilder messageTxtAreaReceive = new StringBuilder();
+		messageTxtAreaReceive.append(message.getName() + " said: " );
+		
+		if(message.getSelectedUsers() != null && !message.getSelectedUsers().isEmpty()) {
+			messageTxtAreaReceive.append(message.getSelectedUsers() + " ");
+		}
+		
+		messageTxtAreaReceive.append(message.getText() + "\n");		
+		
+		frame.getTxtAreaReceive().append(messageTxtAreaReceive.toString());
 	}
 
 	private void refreshOnlines(ChatMessage message) {

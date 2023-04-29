@@ -1,5 +1,6 @@
 package chat.bean;
 
+import java.io.File;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
@@ -15,6 +16,10 @@ public class ChatMessage implements Serializable {
 	private Set<String> setOnlines;
 	// Represent the action of each message, based on a Enum
 	private Action action;
+	// When is a private or group message, this will save all users
+	private String selectedUsers;
+
+	private File file;
 
 	public ChatMessage() {
 		this.setOnlines = new HashSet<String>();
@@ -72,6 +77,22 @@ public class ChatMessage implements Serializable {
 
 	public void setAction(Action action) {
 		this.action = action;
+	}
+
+	public File getFile() {
+		return file;
+	}
+
+	public void setFile(File file) {
+		this.file = file;
+	}
+
+	public String getSelectedUsers() {
+		return selectedUsers;
+	}
+
+	public void setSelectedUsers(String selectedUsers) {
+		this.selectedUsers = selectedUsers;
 	}
 
 	public enum Action {

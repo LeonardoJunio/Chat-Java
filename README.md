@@ -22,9 +22,17 @@
 * Obs: Tests done with eclipse (load as separate projects)
 * Obs 2: To edit the frame visually, you need the WindowBuilder plugin (installable from Eclipse Marketplace) and open it as WindowBuilderEditor (bottom tab 'Design')
 
+* ClienteFrameService -> ClienteService -> ListenerSocket(Servidor) -> ListenerSocket(Cliente (nesse caso pra enviar para os outros usuarios))
+
 ### :warning: Errors/Improvements:
 
+* exceções
+* Mensagens de erros/aviso
+* Listar em Last Group somente os 5 primeiros caracteres de cada nome
+* Criar uma herança com message + chat e arquivo
 * Aplicar a funcionalidade para envio de arquivo (teria caminho padrao e pasta com nome de cada usuario pra simular) (?)
+* Melhora da estrutura de código
+* Ajustar para o processamento principal ficar do lado do servidor, assim enviaria uma lista de mensagens+arquivo para ele processar/enviar/salvar
 * Add project image
 * Adjust project to be able to use docker
 
