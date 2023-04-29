@@ -2,6 +2,8 @@ package chat.util;
 
 import java.util.List;
 
+import chat.constant.ChatMessageConstants;
+
 public class ChatMessageUtils {
 
 	public static String getSelectedUsers(List<Object> selectedUsers) {
@@ -9,9 +11,21 @@ public class ChatMessageUtils {
 			return "";
 		}
 
-		// Pegar 5 prim caracteres para economizar espaco
-		String textAllUsers = selectedUsers.toString().replace("[", "(").replace("]", ")");
+		StringBuilder textAllUsers = new StringBuilder();
+		StringBuilder smallNameUser = new StringBuilder();
 
-		return textAllUsers;
+		selectedUsers.forEach(user -> {
+			String userModifed = user.toString();
+			
+			if(user.toString().length() > ChatMessageConstants.LENGTH_NAME_USER_SELECTED) {
+				userModifed = userModifed.substring(0, ChatMessageConstants.LENGTH_NAME_USER_SELECTED) + "., ";
+			}
+			
+			smallNameUser.append(userModifed);
+		});
+
+		textAllUsers.append(smallNameUser.substring(0, smallNameUser.length() - 2));
+
+		return textAllUsers.toString();
 	}
 }

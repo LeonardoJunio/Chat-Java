@@ -31,7 +31,6 @@ public class ListenerSocket implements Runnable {
 		} catch (IOException ex) {
 			Logger.getLogger(ClienteFrame.class.getName()).log(Level.SEVERE, null, ex);
 		}
-
 	}
 
 	@Override
@@ -97,7 +96,7 @@ public class ListenerSocket implements Runnable {
 		
 		frame.getTxtAreaReceive().setText("");
 		frame.getTxtAreaSend().setText("");
-		frame.getLabelGroup().setText("Last Group: ---");
+		frame.getLabelGroup().setText("Last Selected(s): ---");
 
 		JOptionPane.showMessageDialog(frame, "You've left the chat!");
 	}
@@ -110,8 +109,8 @@ public class ListenerSocket implements Runnable {
 			messageTxtAreaReceive.append(message.getSelectedUsers() + " ");
 		}
 		
-		messageTxtAreaReceive.append(message.getText() + "\n");		
-		
+		messageTxtAreaReceive.append(message.getText() + "\n");
+
 		frame.getTxtAreaReceive().append(messageTxtAreaReceive.toString());
 	}
 

@@ -11,17 +11,15 @@ import chat.util.ChatMessageUtils;
 import chat.util.FileUtils;
 
 public class ChatMessageService {
-
 	public ChatMessage message;
 	private ClienteFrame frame;
 	private ClienteService clientService;
-	
-	public ChatMessageService (ClienteFrame frame, ChatMessage message, ClienteService clientService) {
+
+	public ChatMessageService(ClienteFrame frame, ChatMessage message, ClienteService clientService) {
 		this.frame = frame;
 		this.message = message;
 		this.clientService = clientService;
 	}
-
 
 	public String messageAreaReceive(String text) {
 		String textReturn = "You said: ";
@@ -40,15 +38,15 @@ public class ChatMessageService {
 			textReturn += text;
 		}
 
-		return textReturn + "\n";
+		return textReturn.trim() + "\n";
 	}
-	
+
 	public void sendMessagem(String text, boolean existsFileMessage) {
-		String name = this.message.getName();
+		String name = this.message.getName().trim();
 		File fileMessage = this.message.getFile();
 		List<Object> listSelectedUser = frame.getListOnlines().getSelectedValuesList();
 		String textSend = this.messageTextSend(text);
-		
+
 		// New instance of ChatMessage because is a new message
 		if (listSelectedUser.isEmpty() && !existsFileMessage) {
 			this.message = new ChatMessage(name, textSend);
@@ -56,18 +54,20 @@ public class ChatMessageService {
 
 			this.clientService.send(this.message);
 		} else {
-			String textAllUsers = ChatMessageUtils.getSelectedUsers(frame.getListOnlines().getSelectedValuesList());
-
 			if (listSelectedUser.isEmpty()) {
 				listSelectedUser = this.getAllUsersOnline();
-			} else if (listSelectedUser.size() > 1) {
-				frame.getLabelGroup().setText("Last Group: " + listSelectedUser.toString());
+			} else {
+				String textGroupUsers = ChatMessageUtils
+						.getSelectedUsers(frame.getListOnlines().getSelectedValuesList());
+				frame.getLabelGroup().setText("Last Selected(s): " + textGroupUsers.trim());
 			}
+
+			String textSelectedUsers = listSelectedUser.toString();
 
 			listSelectedUser.forEach(selectedUser -> {
 				this.message = new ChatMessage(name, textSend);
-				this.message.setSelectedUsers(textAllUsers);
-				this.message.setNameReserved(selectedUser.toString());
+				this.message.setSelectedUsers(textSelectedUsers);
+				this.message.setNameReserved(selectedUser.toString().trim());
 				this.message.setAction(Action.SEND_ONE);
 
 				if (existsFileMessage) {
@@ -110,12 +110,12 @@ public class ChatMessageService {
 				textSend.append(" with the following message: ").append("'" + text + "'");
 			}
 
-			textSend.append(". Ele foi salvo na pasta padrão.");
+			textSend.append(". It was saved in the default folder.");
 		} else {
 			textSend.append(text);
 		}
 
-		return textSend.toString();
+		return textSend.toString().trim();
 	}
 
 	private void saveFileMessage(ChatMessage fileMessage) {

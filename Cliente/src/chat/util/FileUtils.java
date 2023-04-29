@@ -14,7 +14,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import chat.bean.ChatMessage;
-import chat.constant.ClienteConstans;
+import chat.constant.ChatMessageConstants;
 
 public class FileUtils {
 
@@ -29,42 +29,44 @@ public class FileUtils {
 
 		return true;
 	}
-	
-	public static void checkAndCreateDirectory(String nameDirectory) {		
-		Path dir = Paths.get(ClienteConstans.PATH_DEFAULT.concat(System.getProperty("file.separator") + nameDirectory));
-		
+
+	public static void checkAndCreateDirectory(String nameDirectory) {
+		Path dir = Paths
+				.get(ChatMessageConstants.PATH_DEFAULT.concat(System.getProperty("file.separator") + nameDirectory));
+
 		if (!Files.exists(dir, LinkOption.NOFOLLOW_LINKS) || !Files.isDirectory(dir, LinkOption.NOFOLLOW_LINKS)) {
 			try {
 				Files.createDirectories(dir);
 			} catch (IOException ex) {
-	            Logger.getLogger(FileUtils.class.getName()).log(Level.SEVERE, null, ex);
-	        }
-		}		
+				Logger.getLogger(FileUtils.class.getName()).log(Level.SEVERE, null, ex);
+			}
+		}
 	}
-	
+
 	public static void saveFile(ChatMessage fileMessage) {
 		try {
-			if (FileUtils.checkFile(fileMessage.getFile())) {	
-	            Thread.sleep(new Random().nextInt(1000));
-	            
-	            long time = System.currentTimeMillis();//tempo exato da execucao dessa linha
-	            
-	            FileInputStream fileInputStream = new FileInputStream(fileMessage.getFile());
-	    		
-	    		String dir = ClienteConstans.PATH_DEFAULT.concat(System.getProperty("file.separator"))
-	    				.concat(fileMessage.getNameReserved()).concat(System.getProperty("file.separator"));
-	            
-	            try (FileOutputStream fileOutputStream = new FileOutputStream(dir + time + fileMessage.getFile().getName())) {
+			if (FileUtils.checkFile(fileMessage.getFile())) {
+				Thread.sleep(new Random().nextInt(1000));
+
+				long time = System.currentTimeMillis();// tempo exato da execucao dessa linha
+
+				FileInputStream fileInputStream = new FileInputStream(fileMessage.getFile());
+
+				String dir = ChatMessageConstants.PATH_DEFAULT.concat(System.getProperty("file.separator"))
+						.concat(fileMessage.getNameReserved()).concat(System.getProperty("file.separator"));
+
+				try (FileOutputStream fileOutputStream = new FileOutputStream(
+						dir + time + fileMessage.getFile().getName())) {
 					FileChannel fileIn = fileInputStream.getChannel();
 					FileChannel fileOut = fileOutputStream.getChannel();
-					
+
 					long size = fileIn.size();
-					
+
 					fileIn.transferTo(0, size, fileOut);
 				}
 			}
-        } catch (IOException | InterruptedException ex) {
-            Logger.getLogger(FileUtils.class.getName()).log(Level.SEVERE, null, ex);
-        }
+		} catch (IOException | InterruptedException ex) {
+			Logger.getLogger(FileUtils.class.getName()).log(Level.SEVERE, null, ex);
+		}
 	}
 }

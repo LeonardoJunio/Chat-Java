@@ -58,13 +58,13 @@ public class ClienteFrameService {
 	}
 
 	public void btnSendActionPerformed(ActionEvent evt) {
-		String text = frame.getTxtAreaSend().getText();
+		String text = frame.getTxtAreaSend().getText().trim();
 		boolean existsFileMessage = FileUtils.checkFileMessage(this.message);
 
 		if (!existsFileMessage && text.isEmpty()) {
 			return;
 		}
-		
+
 		this.chatMessageService = new ChatMessageService(frame, message, clientService);
 		this.chatMessageService.sendMessagem(text, existsFileMessage);
 
@@ -97,6 +97,5 @@ public class ClienteFrameService {
 	public Socket getSocket() {
 		return socket;
 	}
-	
-	
+
 }

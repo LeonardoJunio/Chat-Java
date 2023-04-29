@@ -196,7 +196,7 @@ public class ClienteFrame extends JFrame {
 		});
 
 		labelGroup.setFont(new Font("Ubuntu", 0, 14)); // NOI18N
-		labelGroup.setText("Last Group: ---");
+		labelGroup.setText("Last Selected(s): ---");
 
 		jPanel3Layout.setHorizontalGroup(jPanel3Layout.createParallelGroup(Alignment.LEADING)
 				.addGroup(jPanel3Layout.createSequentialGroup().addContainerGap()
