@@ -30,33 +30,30 @@ public class FileUtils {
 		return true;
 	}
 
-	public static void checkAndCreateDirectory(String nameDirectory) {
-		Path dir = Paths
-				.get(ChatMessageConstants.PATH_DEFAULT.concat(System.getProperty("file.separator") + nameDirectory));
+	public static void checkAndCreateDirectory(String nameUserDirectory, String directory) {
+		String dir = ChatMessageConstants.PATH_DEFAULT.concat(System.getProperty("file.separator")).concat(directory)
+				.concat(System.getProperty("file.separator")).concat(nameUserDirectory);
+		Path pathDir = Paths.get(dir);
 
-		if (!Files.exists(dir, LinkOption.NOFOLLOW_LINKS) || !Files.isDirectory(dir, LinkOption.NOFOLLOW_LINKS)) {
+		if (!Files.exists(pathDir, LinkOption.NOFOLLOW_LINKS)
+				|| !Files.isDirectory(pathDir, LinkOption.NOFOLLOW_LINKS)) {
 			try {
-				Files.createDirectories(dir);
+				Files.createDirectories(pathDir);
 			} catch (IOException ex) {
 				Logger.getLogger(FileUtils.class.getName()).log(Level.SEVERE, null, ex);
 			}
 		}
 	}
 
-	public static void saveFile(ChatMessage fileMessage) {
+	private static void saveFile(File file, String dir) {
 		try {
-			if (FileUtils.checkFile(fileMessage.getFile())) {
-				Thread.sleep(new Random().nextInt(1000));
+			Thread.sleep(new Random().nextInt(1000));
 
-				long time = System.currentTimeMillis();// tempo exato da execucao dessa linha
+			long time = System.currentTimeMillis();
 
-				FileInputStream fileInputStream = new FileInputStream(fileMessage.getFile());
-
-				String dir = ChatMessageConstants.PATH_DEFAULT.concat(System.getProperty("file.separator"))
-						.concat(fileMessage.getNameReserved()).concat(System.getProperty("file.separator"));
-
-				try (FileOutputStream fileOutputStream = new FileOutputStream(
-						dir + time + fileMessage.getFile().getName())) {
+			// Try-with-resources close the object when finished
+			try (FileInputStream fileInputStream = new FileInputStream(file)) {
+				try (FileOutputStream fileOutputStream = new FileOutputStream(dir + time + file.getName())) {
 					FileChannel fileIn = fileInputStream.getChannel();
 					FileChannel fileOut = fileOutputStream.getChannel();
 
@@ -67,6 +64,16 @@ public class FileUtils {
 			}
 		} catch (IOException | InterruptedException ex) {
 			Logger.getLogger(FileUtils.class.getName()).log(Level.SEVERE, null, ex);
+		}
+	}
+
+	public static void saveUsersFile(ChatMessage fileMessage) {
+		if (FileUtils.checkFile(fileMessage.getFile())) {
+			String dir = ChatMessageConstants.PATH_DEFAULT.concat(System.getProperty("file.separator"))
+					.concat(ChatMessageConstants.DIRECTORY_FILE).concat(System.getProperty("file.separator"))
+					.concat(fileMessage.getNameReserved()).concat(System.getProperty("file.separator"));
+
+			saveFile(fileMessage.getFile(), dir);
 		}
 	}
 }

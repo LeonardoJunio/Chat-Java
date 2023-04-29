@@ -26,10 +26,7 @@
 
 ### :warning: Errors/Improvements:
 
-* exceções
-* Tentar abaixar a conversa se um mensagem chegar ?
-* Historico de conversação salva em texto
-* Metodos só tem 1 funcionalidade?
+* Historico de conversação salva em texto(log) e log de erros em arquivo (log utils?)
 * Melhora da estrutura de código
 * Add project image
 * Adjust project to be able to use docker

@@ -74,6 +74,7 @@ public class ClienteFrameService {
 		this.chatMessageService.sendMessagem(text, existsFileMessage);
 
 		frame.getTxtAreaReceive().append(this.chatMessageService.messageAreaReceive(text));
+		frame.getTxtAreaReceive().setCaretPosition(frame.getTxtAreaReceive().getDocument().getLength());
 
 		this.message.setFile(null);
 		this.btnClearActionPerformed(evt);

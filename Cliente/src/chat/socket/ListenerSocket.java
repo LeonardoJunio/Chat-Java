@@ -93,7 +93,7 @@ public class ListenerSocket implements Runnable {
 		frame.getBtnSend().setEnabled(false);
 		frame.getBtnClear().setEnabled(false);
 		frame.getBtnFile().setEnabled(false);
-		
+
 		frame.getTxtAreaReceive().setText("");
 		frame.getTxtAreaSend().setText("");
 		frame.getLabelGroup().setText("Last Selected(s): ---");
@@ -103,15 +103,16 @@ public class ListenerSocket implements Runnable {
 
 	private void receive(ChatMessage message) {
 		StringBuilder messageTxtAreaReceive = new StringBuilder();
-		messageTxtAreaReceive.append(message.getName() + " said: " );
-		
-		if(message.getSelectedUsers() != null && !message.getSelectedUsers().isEmpty()) {
+		messageTxtAreaReceive.append(message.getName() + " said: ");
+
+		if (message.getSelectedUsers() != null && !message.getSelectedUsers().isEmpty()) {
 			messageTxtAreaReceive.append(message.getSelectedUsers() + " ");
 		}
 
 		messageTxtAreaReceive.append(message.getText() + "\n");
 
 		frame.getTxtAreaReceive().append(messageTxtAreaReceive.toString());
+		frame.getTxtAreaReceive().setCaretPosition(frame.getTxtAreaReceive().getDocument().getLength());
 	}
 
 	private void refreshOnlines(ChatMessage message) {

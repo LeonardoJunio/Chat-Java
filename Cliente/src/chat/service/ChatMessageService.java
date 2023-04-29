@@ -6,6 +6,7 @@ import java.util.List;
 
 import chat.bean.ChatMessage;
 import chat.bean.ChatMessage.Action;
+import chat.constant.ChatMessageConstants;
 import chat.frame.ClienteFrame;
 import chat.util.ChatMessageUtils;
 import chat.util.FileUtils;
@@ -122,9 +123,9 @@ public class ChatMessageService {
 
 	private void saveFileMessage(ChatMessage fileMessage) {
 		if (FileUtils.checkFileMessage(this.message)) {
-			FileUtils.checkAndCreateDirectory(message.getNameReserved());
+			FileUtils.checkAndCreateDirectory(message.getNameReserved(), ChatMessageConstants.DIRECTORY_FILE);
 
-			FileUtils.saveFile(fileMessage);
+			FileUtils.saveUsersFile(fileMessage);
 		}
 	}
 }
