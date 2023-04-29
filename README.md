@@ -28,7 +28,6 @@
 
 * exceções
 * Mensagens de erros/aviso
-* Ajustar pra pasta que armazena arquivo ser dentro do projeto, mas sem ter caminho manualmente (System.getProperty ?)
 * Criar uma herança com message + chat e arquivo
 * Ajustar para o processamento principal ficar do lado do servidor, assim enviaria uma lista de mensagens+arquivo para ele processar/enviar/salvar
 * Historico de conversação salva em texto
