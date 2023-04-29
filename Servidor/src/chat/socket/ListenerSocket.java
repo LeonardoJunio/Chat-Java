@@ -53,6 +53,7 @@ public class ListenerSocket implements Runnable {
 				} else if (action.equals(Action.DISCONNECT)) {
 					this.disconnect(message, output);
 					this.sendOnlines();
+					
 					return;
 				} else if (action.equals(Action.SEND_ONE)) {
 					this.sendOne(message);

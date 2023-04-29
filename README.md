@@ -27,9 +27,10 @@
 ### :warning: Errors/Improvements:
 
 * exceções
+* Arquivo para todos adicionando os nomes
+* Tentar abaixar a conversa se um mensagem chegar ?
 * Mensagens de erros/aviso
 * Criar uma herança com message + chat e arquivo
-* Ajustar para o processamento principal ficar do lado do servidor, assim enviaria uma lista de mensagens+arquivo para ele processar/enviar/salvar
 * Historico de conversação salva em texto
 * Metodos só tem 1 funcionalidade?
 * Melhora da estrutura de código

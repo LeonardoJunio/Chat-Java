@@ -19,7 +19,6 @@ public class ChatMessage implements Serializable {
 	private Action action;
 	// When is a private or group message, this will save all users
 	private String selectedUsers;
-
 	private File file;
 
 	public ChatMessage() {

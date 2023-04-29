@@ -5,6 +5,7 @@ import java.io.File;
 import java.net.Socket;
 
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 
 import chat.bean.ChatMessage;
 import chat.bean.ChatMessage.Action;
@@ -31,17 +32,20 @@ public class ClienteFrameService {
 		// Name of user typed on interface, to connect
 		String nameUserConnect = frame.getTxtName().getText();
 
-		if (!nameUserConnect.isEmpty()) {
-			this.message = new ChatMessage(nameUserConnect, Action.CONNECT);
-
-			this.clientService = new ClienteService();
-			this.socket = this.clientService.connect();
-
-			listenerSocket = new ListenerSocket(this.socket, this);
-			new Thread(listenerSocket).start();
-
-			this.clientService.send(message);
+		if (nameUserConnect.isEmpty()) {
+			JOptionPane.showMessageDialog(frame, "Your nickname can't be empty.");
+			return;
 		}
+
+		this.message = new ChatMessage(nameUserConnect, Action.CONNECT);
+
+		this.clientService = new ClienteService();
+		this.socket = this.clientService.connect();
+
+		listenerSocket = new ListenerSocket(this.socket, this);
+		new Thread(listenerSocket).start();
+
+		this.clientService.send(message);
 	}
 
 	public void btnLogoutActionPerformed(ActionEvent evt) {
@@ -62,6 +66,7 @@ public class ClienteFrameService {
 		boolean existsFileMessage = FileUtils.checkFileMessage(this.message);
 
 		if (!existsFileMessage && text.isEmpty()) {
+			JOptionPane.showMessageDialog(frame, "No message and file inserted.");
 			return;
 		}
 
@@ -97,5 +102,4 @@ public class ClienteFrameService {
 	public Socket getSocket() {
 		return socket;
 	}
-
 }

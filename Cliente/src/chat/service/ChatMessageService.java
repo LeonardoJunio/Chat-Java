@@ -59,7 +59,7 @@ public class ChatMessageService {
 			} else {
 				String textGroupUsers = ChatMessageUtils
 						.getSelectedUsers(frame.getListOnlines().getSelectedValuesList());
-				frame.getLabelGroup().setText("Last Selected(s): " + textGroupUsers.trim());
+				frame.getLabelGroup().setText("Last Selected(s): " + textGroupUsers);
 			}
 
 			String textSelectedUsers = listSelectedUser.toString();

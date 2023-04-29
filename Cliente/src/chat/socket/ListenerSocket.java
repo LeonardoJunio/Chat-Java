@@ -108,7 +108,7 @@ public class ListenerSocket implements Runnable {
 		if(message.getSelectedUsers() != null && !message.getSelectedUsers().isEmpty()) {
 			messageTxtAreaReceive.append(message.getSelectedUsers() + " ");
 		}
-		
+
 		messageTxtAreaReceive.append(message.getText() + "\n");
 
 		frame.getTxtAreaReceive().append(messageTxtAreaReceive.toString());
