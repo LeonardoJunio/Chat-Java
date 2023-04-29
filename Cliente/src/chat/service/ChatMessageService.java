@@ -54,19 +54,21 @@ public class ChatMessageService {
 
 			this.clientService.send(this.message);
 		} else {
+			StringBuilder textSelectedUsers = new StringBuilder();
+
 			if (listSelectedUser.isEmpty()) {
 				listSelectedUser = this.getAllUsersOnline();
 			} else {
 				String textGroupUsers = ChatMessageUtils
 						.getSelectedUsers(frame.getListOnlines().getSelectedValuesList());
 				frame.getLabelGroup().setText("Last Selected(s): " + textGroupUsers);
-			}
 
-			String textSelectedUsers = listSelectedUser.toString();
+				textSelectedUsers.append(listSelectedUser.toString());
+			}
 
 			listSelectedUser.forEach(selectedUser -> {
 				this.message = new ChatMessage(name, textSend);
-				this.message.setSelectedUsers(textSelectedUsers);
+				this.message.setSelectedUsers(textSelectedUsers.toString());
 				this.message.setNameReserved(selectedUser.toString().trim());
 				this.message.setAction(Action.SEND_ONE);
 

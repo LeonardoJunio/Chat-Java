@@ -27,10 +27,7 @@
 ### :warning: Errors/Improvements:
 
 * exceções
-* Arquivo para todos adicionando os nomes
 * Tentar abaixar a conversa se um mensagem chegar ?
-* Mensagens de erros/aviso
-* Criar uma herança com message + chat e arquivo
 * Historico de conversação salva em texto
 * Metodos só tem 1 funcionalidade?
 * Melhora da estrutura de código
