@@ -40,13 +40,15 @@ public class FileUtils {
 
 		Path pathDir = Paths.get(dir);
 
-		if (!Files.exists(pathDir, LinkOption.NOFOLLOW_LINKS)
-				|| !Files.isDirectory(pathDir, LinkOption.NOFOLLOW_LINKS)) {
-			try {
+		try {
+			if (!Files.exists(pathDir, LinkOption.NOFOLLOW_LINKS)
+					|| !Files.isDirectory(pathDir, LinkOption.NOFOLLOW_LINKS)) {
 				Files.createDirectories(pathDir);
-			} catch (IOException ex) {
-				Logger.getLogger(FileUtils.class.getName()).log(Level.SEVERE, null, ex);
 			}
+		} catch (IOException ex) {
+			LogUtils.saveLogError(LogUtils.getErrorMessageLog(ex));
+
+			Logger.getLogger(FileUtils.class.getName()).log(Level.SEVERE, null, ex);
 		}
 	}
 
@@ -70,6 +72,8 @@ public class FileUtils {
 				}
 			}
 		} catch (IOException | InterruptedException ex) {
+			LogUtils.saveLogError(LogUtils.getErrorMessageLog(ex));
+
 			Logger.getLogger(FileUtils.class.getName()).log(Level.SEVERE, null, ex);
 		}
 	}
@@ -93,6 +97,8 @@ public class FileUtils {
 
 			bufferedWriter.close();
 		} catch (IOException ex) {
+			LogUtils.saveLogError(LogUtils.getErrorMessageLog(ex));
+
 			Logger.getLogger(FileUtils.class.getName()).log(Level.SEVERE, null, ex);
 		}
 	}

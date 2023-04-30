@@ -34,10 +34,10 @@ public class ChatMessageService {
 		}
 
 		if (FileUtils.checkFileMessage(this.message)) {
-			textReturn += "You sent the following file: '" + this.message.getFile().getName();
+			textReturn += "You sent the following file: '" + this.message.getFile().getName() + "'";
 
 			if (!text.isEmpty()) {
-				textReturn += "' with the following message: '" + text + "'.";
+				textReturn += " with the following message: '" + text + "'.";
 			}
 		} else {
 			textReturn += text;

@@ -26,9 +26,9 @@
 
 ### :warning: Errors/Improvements:
 
-* Renomear pasta arquivos para files
+* Renomear pasta arquivos para files (constants) e criar subpasta para cada tipo de log
 * Log de arquivos
-* Log de erros
+* Log de erros (inclusive do servidor - pastas distintas ou nome do projeto no log? algo pra diferenciar)
 * Melhora da estrutura de código
 * Add project image
 * Adjust project to be able to use docker

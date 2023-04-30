@@ -47,7 +47,7 @@ public class ClienteFrameService {
 		listenerSocket = new ListenerSocket(this.socket, this);
 		new Thread(listenerSocket).start();
 
-		LogUtils.saveMessageLog(ChatMessageUtils.messageLogin(nameUserConnect));
+		LogUtils.saveLogMessage(ChatMessageUtils.messageLogin(nameUserConnect));
 
 		this.clientService.send(message);
 	}
@@ -57,7 +57,7 @@ public class ClienteFrameService {
 
 		frame.getListOnlines().setListData(new String[0]);
 
-		LogUtils.saveMessageLog(ChatMessageUtils.messageLogout(this.message.getName()));
+		LogUtils.saveLogMessage(ChatMessageUtils.messageLogout(this.message.getName()));
 
 		this.clientService.send(message);
 
@@ -83,7 +83,7 @@ public class ClienteFrameService {
 		frame.getTxtAreaReceive().append(this.chatMessageService.messageAreaReceive(text));
 		frame.getTxtAreaReceive().setCaretPosition(frame.getTxtAreaReceive().getDocument().getLength());
 
-		LogUtils.saveMessageLog(this.chatMessageService.messageAreaReceive(text, this.message.getName()));
+		LogUtils.saveLogMessage(this.chatMessageService.messageAreaReceive(text, this.message.getName()));
 
 		this.message.setFile(null);
 		this.btnClearActionPerformed(evt);

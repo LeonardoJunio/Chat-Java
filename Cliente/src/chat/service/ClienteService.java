@@ -8,6 +8,7 @@ import java.util.logging.Logger;
 
 import chat.bean.ChatMessage;
 import chat.constant.ClienteConstans;
+import chat.util.LogUtils;
 
 public class ClienteService {
 	private Socket socket;
@@ -19,6 +20,8 @@ public class ClienteService {
 			this.socket = new Socket(ClienteConstans.CLIENT_IP, ClienteConstans.CLIENT_PORT);
 			this.output = new ObjectOutputStream(socket.getOutputStream());
 		} catch (IOException ex) {
+			LogUtils.saveLogError(LogUtils.getErrorMessageLog(ex));
+
 			Logger.getLogger(ClienteService.class.getName()).log(Level.SEVERE, null, ex);
 		}
 
@@ -30,6 +33,8 @@ public class ClienteService {
 		try {
 			output.writeObject(message);
 		} catch (IOException ex) {
+			LogUtils.saveLogError(LogUtils.getErrorMessageLog(ex));
+
 			Logger.getLogger(ClienteService.class.getName()).log(Level.SEVERE, null, ex);
 		}
 	}

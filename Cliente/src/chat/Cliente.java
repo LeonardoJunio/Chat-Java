@@ -8,6 +8,7 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
 import chat.frame.ClienteFrame;
+import chat.util.LogUtils;
 
 public class Cliente {
 	public static void main(String args[]) {
@@ -30,6 +31,8 @@ public class Cliente {
 			}
 		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
 				| UnsupportedLookAndFeelException ex) {
+			LogUtils.saveLogError(LogUtils.getErrorMessageLog(ex));
+
 			Logger.getLogger(ClienteFrame.class.getName()).log(Level.SEVERE, null, ex);
 		}
 

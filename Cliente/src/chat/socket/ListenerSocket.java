@@ -16,6 +16,7 @@ import chat.bean.ChatMessage.Action;
 import chat.constant.ClienteConstans;
 import chat.frame.ClienteFrame;
 import chat.service.ClienteFrameService;
+import chat.util.LogUtils;
 
 public class ListenerSocket implements Runnable {
 	private ClienteFrame frame;
@@ -29,6 +30,8 @@ public class ListenerSocket implements Runnable {
 			this.frameService = frameService;
 			this.frame = frameService.getFrame();
 		} catch (IOException ex) {
+			LogUtils.saveLogError(LogUtils.getErrorMessageLog(ex));
+
 			Logger.getLogger(ClienteFrame.class.getName()).log(Level.SEVERE, null, ex);
 		}
 	}
@@ -55,6 +58,8 @@ public class ListenerSocket implements Runnable {
 				// The server doesn't send "SEND_ALL". This is many "SEND_ONE"
 			}
 		} catch (IOException | ClassNotFoundException ex) {
+			LogUtils.saveLogError(LogUtils.getErrorMessageLog(ex));
+
 			Logger.getLogger(ClienteFrame.class.getName()).log(Level.SEVERE, null, ex);
 		}
 	}
