@@ -53,7 +53,7 @@ public class ListenerSocket implements Runnable {
 				} else if (action.equals(Action.DISCONNECT)) {
 					this.disconnect(message, output);
 					this.sendOnlines();
-					
+
 					return;
 				} else if (action.equals(Action.SEND_ONE)) {
 					this.sendOne(message);
@@ -68,7 +68,7 @@ public class ListenerSocket implements Runnable {
 			disconnect(cm, output);
 			sendOnlines();
 
-			System.out.println(message.getName() + " deixou o chat.");
+			System.out.println(message.getName() + ": closed the chat.");
 		} catch (ClassNotFoundException ex) {
 			Logger.getLogger(ServidorService.class.getName()).log(Level.SEVERE, null, ex);
 		}
@@ -88,7 +88,7 @@ public class ListenerSocket implements Runnable {
 		send(message, output);
 
 		if (mapOnlines.size() > 0) {
-			message.setText("--entrei no chat!--");
+			message.setText("-- I'm entering the chat! --");
 			message.setAction(Action.SEND_ONE);
 
 			sendAll(message);
@@ -100,12 +100,12 @@ public class ListenerSocket implements Runnable {
 	private void disconnect(ChatMessage message, ObjectOutputStream output) {
 		mapOnlines.remove(message.getName());
 
-		message.setText("--saindo do chat!--");
+		message.setText("-- I'm leaving the chat! --");
 		message.setAction(Action.SEND_ONE);
 
 		sendAll(message);
 
-		System.out.println("User: " + message.getName() + " sai da sala.");
+		System.out.println("User: " + message.getName() + " left the chat.");
 	}
 
 	private void send(ChatMessage message, ObjectOutputStream output) {

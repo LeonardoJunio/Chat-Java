@@ -26,7 +26,9 @@
 
 ### :warning: Errors/Improvements:
 
-* Historico de conversação salva em texto(log) e log de erros em arquivo (log utils?)
+* Renomear pasta arquivos para files
+* Log de arquivos
+* Log de erros
 * Melhora da estrutura de código
 * Add project image
 * Adjust project to be able to use docker

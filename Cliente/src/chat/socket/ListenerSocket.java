@@ -103,7 +103,7 @@ public class ListenerSocket implements Runnable {
 
 	private void receive(ChatMessage message) {
 		StringBuilder messageTxtAreaReceive = new StringBuilder();
-		messageTxtAreaReceive.append(message.getName() + " said: ");
+		messageTxtAreaReceive.append(message.getName() + ": ");
 
 		if (message.getSelectedUsers() != null && !message.getSelectedUsers().isEmpty()) {
 			messageTxtAreaReceive.append(message.getSelectedUsers() + " ");

@@ -11,7 +11,9 @@ import chat.bean.ChatMessage;
 import chat.bean.ChatMessage.Action;
 import chat.frame.ClienteFrame;
 import chat.socket.ListenerSocket;
+import chat.util.ChatMessageUtils;
 import chat.util.FileUtils;
+import chat.util.LogUtils;
 
 public class ClienteFrameService {
 	private ClienteFrame frame;
@@ -45,14 +47,19 @@ public class ClienteFrameService {
 		listenerSocket = new ListenerSocket(this.socket, this);
 		new Thread(listenerSocket).start();
 
+		LogUtils.saveMessageLog(ChatMessageUtils.messageLogin(nameUserConnect));
+
 		this.clientService.send(message);
 	}
 
 	public void btnLogoutActionPerformed(ActionEvent evt) {
 		ChatMessage message = new ChatMessage(this.message.getName(), Action.DISCONNECT);
-		this.clientService.send(message);
 
 		frame.getListOnlines().setListData(new String[0]);
+
+		LogUtils.saveMessageLog(ChatMessageUtils.messageLogout(this.message.getName()));
+
+		this.clientService.send(message);
 
 		listenerSocket.disconnected();
 	}
@@ -75,6 +82,8 @@ public class ClienteFrameService {
 
 		frame.getTxtAreaReceive().append(this.chatMessageService.messageAreaReceive(text));
 		frame.getTxtAreaReceive().setCaretPosition(frame.getTxtAreaReceive().getDocument().getLength());
+
+		LogUtils.saveMessageLog(this.chatMessageService.messageAreaReceive(text, this.message.getName()));
 
 		this.message.setFile(null);
 		this.btnClearActionPerformed(evt);

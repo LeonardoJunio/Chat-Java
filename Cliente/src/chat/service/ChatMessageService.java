@@ -27,17 +27,17 @@ public class ChatMessageService {
 	}
 
 	public String messageAreaReceive(String text, String User) {
-		String textReturn = User + " said: ";
+		String textReturn = User + ": ";
 
 		if (this.message.getSelectedUsers() != null && !this.message.getSelectedUsers().isEmpty()) {
 			textReturn += this.message.getSelectedUsers() + " ";
 		}
 
 		if (FileUtils.checkFileMessage(this.message)) {
-			textReturn += User + " sent the following file: '" + this.message.getFile().getName();
+			textReturn += "You sent the following file: '" + this.message.getFile().getName();
 
 			if (!text.isEmpty()) {
-				textReturn += "' with the following message: '" + text + "'";
+				textReturn += "' with the following message: '" + text + "'.";
 			}
 		} else {
 			textReturn += text;

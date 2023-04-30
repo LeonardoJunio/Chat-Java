@@ -1,8 +1,10 @@
 package chat.util;
 
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.channels.FileChannel;
 import java.nio.file.Files;
@@ -17,17 +19,12 @@ import chat.bean.ChatMessage;
 import chat.constant.ChatMessageConstants;
 
 public class FileUtils {
-
 	public static boolean checkFileMessage(ChatMessage message) {
 		return checkFile(message.getFile());
 	}
 
 	public static boolean checkFile(File fileMessage) {
-		if (fileMessage == null || fileMessage.getName().isEmpty()) {
-			return false;
-		}
-
-		return true;
+		return !(fileMessage == null || fileMessage.getName().isEmpty());
 	}
 
 	public static void checkAndCreateDirectory(String directory) {
@@ -61,7 +58,9 @@ public class FileUtils {
 
 			// Try-with-resources close the object when finished
 			try (FileInputStream fileInputStream = new FileInputStream(file)) {
-				try (FileOutputStream fileOutputStream = new FileOutputStream(dir + time + file.getName())) {
+				String dirWithFileName = dir + time + "-" + file.getName();
+
+				try (FileOutputStream fileOutputStream = new FileOutputStream(dirWithFileName)) {
 					FileChannel fileIn = fileInputStream.getChannel();
 					FileChannel fileOut = fileOutputStream.getChannel();
 
@@ -82,6 +81,19 @@ public class FileUtils {
 					.concat(fileMessage.getNameReserved()).concat(System.getProperty("file.separator"));
 
 			saveFile(fileMessage.getFile(), dir);
+		}
+	}
+
+	public static void saveLogTxt(String dir, String textMessageLog) {
+		try {
+			FileWriter writer = new FileWriter(dir, true);
+			BufferedWriter bufferedWriter = new BufferedWriter(writer);
+
+			bufferedWriter.write(textMessageLog);
+
+			bufferedWriter.close();
+		} catch (IOException ex) {
+			Logger.getLogger(FileUtils.class.getName()).log(Level.SEVERE, null, ex);
 		}
 	}
 }
