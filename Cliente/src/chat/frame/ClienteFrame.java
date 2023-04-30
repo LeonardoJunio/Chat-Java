@@ -146,7 +146,7 @@ public class ClienteFrame extends JFrame {
 		btnGroup.setVisible(false);
 
 		jPanel2.setLayout(jPanel2Layout);
-		
+
 		jPanel2Layout.setHorizontalGroup(jPanel2Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
 				.addGroup(jPanel2Layout.createSequentialGroup().addContainerGap()
 						.addGroup(jPanel2Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
@@ -286,11 +286,11 @@ public class ClienteFrame extends JFrame {
 	public JLabel getLabelGroup() {
 		return labelGroup;
 	}
-	
+
 	public JButton getBtnFile() {
 		return btnFile;
 	}
-	
+
 	public JList<Object> getListOnlines() {
 		return listOnlines;
 	}
