@@ -14,6 +14,7 @@ import chat.bean.ChatMessage;
 import chat.bean.ChatMessage.Action;
 import chat.constant.ServidorConstants;
 import chat.service.ServidorService;
+import chat.util.LogUtils;
 
 public class ListenerSocket implements Runnable {
 	// Message output
@@ -30,6 +31,8 @@ public class ListenerSocket implements Runnable {
 			this.input = new ObjectInputStream(socket.getInputStream());
 			this.mapOnlines = mapOnlines;
 		} catch (IOException ex) {
+			LogUtils.saveLogError(LogUtils.getErrorMessageLog(ex));
+
 			Logger.getLogger(ServidorService.class.getName()).log(Level.SEVERE, null, ex);
 		}
 	}
@@ -62,14 +65,22 @@ public class ListenerSocket implements Runnable {
 				}
 			}
 		} catch (IOException ex) {
+			// When user close the window without logout, show this error too
+			LogUtils.saveLogError(LogUtils.getErrorMessageLog(ex));
+
 			ChatMessage cm = new ChatMessage();
-			cm.setName(message.getName());
 
-			disconnect(cm, output);
-			sendOnlines();
+			if (message != null) {
+				cm.setName(message.getName());
 
-			System.out.println(message.getName() + ": closed the chat.");
+				disconnect(cm, output);
+				sendOnlines();
+
+				System.out.println(message.getName() + ": closed the chat.");
+			}
 		} catch (ClassNotFoundException ex) {
+			LogUtils.saveLogError(LogUtils.getErrorMessageLog(ex));
+
 			Logger.getLogger(ServidorService.class.getName()).log(Level.SEVERE, null, ex);
 		}
 	}
@@ -112,6 +123,8 @@ public class ListenerSocket implements Runnable {
 		try {
 			output.writeObject(message);
 		} catch (IOException ex) {
+			LogUtils.saveLogError(LogUtils.getErrorMessageLog(ex));
+
 			Logger.getLogger(ServidorService.class.getName()).log(Level.SEVERE, null, ex);
 		}
 	}
@@ -122,6 +135,8 @@ public class ListenerSocket implements Runnable {
 				try {
 					kv.getValue().writeObject(message);
 				} catch (IOException ex) {
+					LogUtils.saveLogError(LogUtils.getErrorMessageLog(ex));
+
 					Logger.getLogger(ServidorService.class.getName()).log(Level.SEVERE, null, ex);
 				}
 			}
@@ -139,6 +154,8 @@ public class ListenerSocket implements Runnable {
 					// Value has the ObjectOutputStream
 					kv.getValue().writeObject(message);
 				} catch (IOException ex) {
+					LogUtils.saveLogError(LogUtils.getErrorMessageLog(ex));
+
 					Logger.getLogger(ServidorService.class.getName()).log(Level.SEVERE, null, ex);
 				}
 			}
@@ -162,6 +179,8 @@ public class ListenerSocket implements Runnable {
 			try {
 				kv.getValue().writeObject(message);
 			} catch (IOException ex) {
+				LogUtils.saveLogError(LogUtils.getErrorMessageLog(ex));
+
 				Logger.getLogger(ServidorService.class.getName()).log(Level.SEVERE, null, ex);
 			}
 		}

@@ -11,6 +11,7 @@ import java.util.logging.Logger;
 
 import chat.constant.ServidorConstants;
 import chat.socket.ListenerSocket;
+import chat.util.LogUtils;
 
 public class ServidorService {
 	private ServerSocket serverSocket;
@@ -33,6 +34,8 @@ public class ServidorService {
 				new Thread(new ListenerSocket(socket, mapOnlines)).start();
 			}
 		} catch (IOException ex) {
+			LogUtils.saveLogError(LogUtils.getErrorMessageLog(ex));
+
 			Logger.getLogger(ServidorService.class.getName()).log(Level.SEVERE, null, ex);
 		}
 	}
