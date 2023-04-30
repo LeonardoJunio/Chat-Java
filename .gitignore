@@ -110,7 +110,8 @@ buildNumber.properties
 .classpath
 
 
-arquivos/*
+_arquivos/*
+_logs/*
 
 
 

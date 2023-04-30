@@ -71,7 +71,7 @@ public class ClienteFrameService {
 		}
 
 		this.chatMessageService = new ChatMessageService(frame, message, clientService);
-		this.chatMessageService.sendMessagem(text, existsFileMessage);
+		this.chatMessageService.sendMessage(text, existsFileMessage);
 
 		frame.getTxtAreaReceive().append(this.chatMessageService.messageAreaReceive(text));
 		frame.getTxtAreaReceive().setCaretPosition(frame.getTxtAreaReceive().getDocument().getLength());

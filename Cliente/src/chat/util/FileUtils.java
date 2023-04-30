@@ -30,9 +30,17 @@ public class FileUtils {
 		return true;
 	}
 
-	public static void checkAndCreateDirectory(String nameUserDirectory, String directory) {
-		String dir = ChatMessageConstants.PATH_DEFAULT.concat(System.getProperty("file.separator")).concat(directory)
-				.concat(System.getProperty("file.separator")).concat(nameUserDirectory);
+	public static void checkAndCreateDirectory(String directory) {
+		checkAndCreateDirectory(directory, null);
+	}
+
+	public static void checkAndCreateDirectory(String directory, String nameUserDirectory) {
+		String dir = ChatMessageConstants.PATH_DEFAULT.concat(System.getProperty("file.separator")).concat(directory);
+
+		if (nameUserDirectory != null) {
+			dir = dir.concat(System.getProperty("file.separator")).concat(nameUserDirectory);
+		}
+
 		Path pathDir = Paths.get(dir);
 
 		if (!Files.exists(pathDir, LinkOption.NOFOLLOW_LINKS)

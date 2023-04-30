@@ -23,14 +23,18 @@ public class ChatMessageService {
 	}
 
 	public String messageAreaReceive(String text) {
-		String textReturn = "You said: ";
+		return this.messageAreaReceive(text, "You");
+	}
+
+	public String messageAreaReceive(String text, String User) {
+		String textReturn = User + " said: ";
 
 		if (this.message.getSelectedUsers() != null && !this.message.getSelectedUsers().isEmpty()) {
 			textReturn += this.message.getSelectedUsers() + " ";
 		}
 
 		if (FileUtils.checkFileMessage(this.message)) {
-			textReturn += "You sent the following file: '" + this.message.getFile().getName();
+			textReturn += User + " sent the following file: '" + this.message.getFile().getName();
 
 			if (!text.isEmpty()) {
 				textReturn += "' with the following message: '" + text + "'";
@@ -42,7 +46,7 @@ public class ChatMessageService {
 		return textReturn.trim() + "\n";
 	}
 
-	public void sendMessagem(String text, boolean existsFileMessage) {
+	public void sendMessage(String text, boolean existsFileMessage) {
 		String name = this.message.getName().trim();
 		File fileMessage = this.message.getFile();
 		List<Object> listSelectedUser = frame.getListOnlines().getSelectedValuesList();
@@ -123,7 +127,7 @@ public class ChatMessageService {
 
 	private void saveFileMessage(ChatMessage fileMessage) {
 		if (FileUtils.checkFileMessage(this.message)) {
-			FileUtils.checkAndCreateDirectory(message.getNameReserved(), ChatMessageConstants.DIRECTORY_FILE);
+			FileUtils.checkAndCreateDirectory(ChatMessageConstants.DIRECTORY_FILE, message.getNameReserved());
 
 			FileUtils.saveUsersFile(fileMessage);
 		}
